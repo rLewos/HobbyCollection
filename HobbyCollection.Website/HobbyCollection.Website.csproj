@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hobby.Infraestructure\Hobby.Infraestructure.csproj" />
+    <ProjectReference Include="..\Hobby.Model\Hobby.Model.csproj" />
+    <ProjectReference Include="..\Hobby.Service\Hobby.Service.csproj" />
+    <ProjectReference Include="..\Hobby.Repository\Hobby.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

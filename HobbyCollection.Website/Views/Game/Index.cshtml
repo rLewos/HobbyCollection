@@ -1,0 +1,15 @@
+﻿@using Games.ViewModel;
+@model GameViewModel;
+
+<h1>HelloWorld</h1>
+
+
+@if(Model.GameList != null && Model.GameList.Count > 0){
+	<ul>
+		@foreach (var g in Model.GameList)
+		{
+			<li>@g.Name</li>
+		}
+	</ul>	
+}
+

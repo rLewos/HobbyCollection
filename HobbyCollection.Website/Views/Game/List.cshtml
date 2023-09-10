@@ -1,0 +1,10 @@
+﻿@model Games.ViewModel.GameViewModel
+
+<div>
+	<ul>
+		@foreach (var item in Model.GameList)
+		{
+			<li>@item.Name</li>
+		}
+	</ul>
+</div>
