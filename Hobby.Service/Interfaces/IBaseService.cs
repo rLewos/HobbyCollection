@@ -10,8 +10,8 @@ namespace Games.Service.Interfaces
     {
         public void Save(T obj);
         public void Update(T obj);
-        public void Delete(T obj);
-        public T Get(int codObj);
-        public T Validate(T t);
+        public void Delete(int? codObj);
+        public T? Get(int? codObj);
+        public void Validate(T t);
     }
 }

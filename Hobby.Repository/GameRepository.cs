@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Games.Repository
 {
-	public class GameRepository : IGameRepository
+	public class GameRepository : IBaseRepository<Game>, IGameRepository
 	{
 		private HobbyContext _context;
 
@@ -32,14 +32,23 @@ namespace Games.Repository
 			}
 		}
 
-		public void Delete(Game entity)
+		public void Delete(Game? entity)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				_context.Games.Remove(entity);
+				_context.SaveChanges();
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
 		}
 
-		public Game Get(int id)
+		public Game? Get(int id)
 		{
-			throw new NotImplementedException();
+			return _context.Games.SingleOrDefault(g => g.Id == id);
 		}
 
 		public IList<Game> ListAll()

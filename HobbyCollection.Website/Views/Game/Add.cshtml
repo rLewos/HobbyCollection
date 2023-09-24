@@ -1,6 +1,6 @@
 ﻿@model Games.ViewModel.GameViewModel
 
-<form asp-action="Save" method="post">
+<form asp-controller="Game" asp-action="Save" method="post">
 	<input type="hidden" asp-for="@Model.Game.Id" />
 
 	<div>

@@ -25,8 +25,7 @@ namespace Games.Tests
 		{
 			// Arrange
 			Game game = new Game();
-			//game.Id = 1;
-			game.Name = "test";
+			game.Name = "Game Test";
 			game.ReleaseDate = DateTime.Now;
 			
 			game.IsActive = true;
@@ -35,27 +34,44 @@ namespace Games.Tests
 
 			// Act
 			_gameService.Save(game);
-			Game returnedGame = _gameService.List().FirstOrDefault();
+			Game returnedGame = _gameService.Get(game.Id);
 
 			// Assert
 			Assert.Equal(game.Id, game.Id);
 		}
-
-		[Fact(Skip = "")] 
-		public void Remove() { }
 		
-		[Fact(Skip = "")] 
-		public void Get() { }
+		[Theory]
+		[InlineData(1)]
+		public void Get(int idGame) {
+			// Arrange
+			// Act
+			Game game = _gameService.Get(idGame);
+
+			// Asset
+			Assert.NotNull(game);
+		}
 		
 		[Fact] 
 		public void List() {
-			
+			//Arrange
+			//Act
 			IList<Game>? gameList =_gameService.List();
 			
+			// Assert
 			Assert.NotNull(gameList);
 			Assert.True(gameList.Count > 0);
-
 		}
 
+		[Theory]
+		[InlineData(1)]
+		public void Remove(int? idGame) {
+			// Arrange
+			// Act
+			_gameService.Delete(idGame);
+			Game? game = _gameService.Get(idGame);
+
+			// Assert
+			Assert.Null(game);
+		}
 	}
 }

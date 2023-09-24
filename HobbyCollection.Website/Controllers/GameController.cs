@@ -14,33 +14,11 @@ namespace Games.Controllers
             _gameService = gameService;
         }
 
-        public IActionResult Index()
+		#region Views
+
+		public IActionResult Index()
         {
-            GameViewModel vm = new GameViewModel();
-            
-            Game game = new Game { 
-                Name = "Test",
-                ReleaseDate = DateTime.Now,
-                IsActive = true,
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now
-            };
-			
-			_gameService.Save(game);
-			
-            game = new Game
-			{
-				Name = "Test 2",
-				ReleaseDate = DateTime.Now,
-				IsActive = true,
-				CreatedDate = DateTime.Now,
-				UpdatedDate = DateTime.Now
-			};
-
-			_gameService.Save(game);
-			vm.GameList = _gameService.List();
-
-            return View(vm);
+            return RedirectToAction("List");
         }
 
         public IActionResult List() {
@@ -57,12 +35,39 @@ namespace Games.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        public IActionResult Detail(int? idGame) {
+
+            GameViewModel vm = new GameViewModel();
+            vm.Game = _gameService.Get(idGame.Value);
+
+            return View(vm);
+        }
+
+        public IActionResult Edit(int? idGame)
+        {
+            GameViewModel vm = new GameViewModel();
+            vm.Game = _gameService.Get(idGame);
+
+            return View(vm);
+        }
+
+		#endregion
+
+		[HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Save(GameViewModel vm) {
-            
             _gameService.Save(vm.Game);
+
             return Json(new { });
         }
 
-    }
+		[HttpPost]
+		public IActionResult Delete(int? idGame)
+		{
+			_gameService.Delete(null);
+
+			return View();
+		}
+
+	}
 }

@@ -4,7 +4,7 @@ using Games.Service.Interfaces;
 
 namespace Games.Service
 {
-    public class GameService : BaseService<Game>, IGameService
+	public class GameService : IBaseService<Game>, IGameService
     {
         private IGameRepository _gameRepository;
 
@@ -13,14 +13,39 @@ namespace Games.Service
             _gameRepository = gameRepository;
         }
 
-        public void Delete(Game obj)
-        {
-            throw new NotImplementedException();
-        }
+		public void Delete(int? codObj)
+		{
+            try
+            {
+				if (!codObj.HasValue)
+					throw new ArgumentNullException(nameof(codObj));
 
-        public Game Get(int codObj)
+				Game? game = this.Get(codObj);
+
+                _gameRepository.Delete(game);
+			}
+            catch (Exception e)
+            {
+                throw;
+            }
+		}
+
+		public Game? Get(int? codObj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!codObj.HasValue)
+                    throw new ArgumentNullException(nameof(codObj));
+
+				Game? returnGame = _gameRepository.Get(codObj.Value);
+
+				return returnGame;
+			}
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         public IList<Game> List()
@@ -54,16 +79,14 @@ namespace Games.Service
         }
 
         public void Validate(Game game) {
-            if (game == null) {
+            
+            if (game == null)
                 throw new ArgumentNullException(nameof(game));
-            }
 
             if (string.IsNullOrEmpty(game.Name))
-            {
                 throw new Exception("Game's name is empty");
-            }
-        }
 
+        }
 
     }
 }
