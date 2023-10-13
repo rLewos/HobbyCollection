@@ -48,7 +48,17 @@ namespace Games.Service
             }
         }
 
-        public IList<Game> List()
+		public Game? GetByName(string? gameName)
+		{
+            if (gameName == null)
+                throw new ArgumentNullException("Name is null");
+
+            Game? gameReturn = null;
+            gameReturn = _gameRepository.GetByName(gameName);
+            return gameReturn;
+		}
+
+		public IList<Game> List()
         {
             return _gameRepository.ListAll();
         }
@@ -57,14 +67,18 @@ namespace Games.Service
         {
             try
             {
-                this.Validate(obj);
+                obj.Validate();
+                
                 if (obj.Id <= 0)
 					obj.CreatedDate = DateTime.Now;
 
                 obj.UpdatedDate = DateTime.Now;
                 obj.IsActive = true;
 
-                _gameRepository.Add(obj);
+                if (obj.Id <= 0)
+                    _gameRepository.Add(obj);
+                else
+                    _gameRepository.Update(obj);
 			}
             catch (Exception e)
             {

@@ -51,6 +51,11 @@ namespace Games.Repository
 			return _context.Games.SingleOrDefault(g => g.Id == id);
 		}
 
+		public Game? GetByName(string gameName)
+		{
+			return _context.Games.SingleOrDefault(g => g.Name == gameName);
+		}
+
 		public IList<Game> ListAll()
 		{
 			IList<Game> list = new List<Game>();

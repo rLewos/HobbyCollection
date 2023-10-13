@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace Games.Model
 {
-    public class UserGame : BaseModel
+	public class UserGame : BaseModel
     {
         public User? User { get; set; }
         public Game? Game { get; set; }
         public bool HasBeaten { get; set; }
-    }
+
+		public override void Validate()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

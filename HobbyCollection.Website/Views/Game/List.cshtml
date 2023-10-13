@@ -1,10 +1,32 @@
-﻿@model Games.ViewModel.GameViewModel
+﻿@model HobbyCollection.Website.ViewModels.GameViewModel
 
 <div>
-	<ul>
-		@foreach (var item in Model.GameList)
-		{
-			<li>@item.Name</li>
-		}
-	</ul>
+	@if (Model.GameList != null && Model.GameList.Count > 0)
+	{
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Release Date</th>
+					<th>-</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.GameList)
+				{
+					<tr>
+						<td>@item.Id</td>
+						<td><a asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></td>
+						<td>@item.ReleaseDate.ToShortDateString()</td>
+						<td>-</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>There aren't games on database...</p>
+	}
 </div>

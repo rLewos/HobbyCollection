@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Games.Infraestructure.Migrations
+namespace Hobby.Infraestructure.Migrations
 {
     [DbContext(typeof(HobbyContext))]
     partial class HobbyContextModelSnapshot : ModelSnapshot
@@ -26,7 +26,8 @@ namespace Games.Infraestructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_Developer");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -36,7 +37,7 @@ namespace Games.Infraestructure.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnName("ind_Active");
+                        .HasColumnName("is_Active");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -47,7 +48,8 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("dat_Updated");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Developer");
 
                     b.ToTable("Tb_Developer", (string)null);
                 });
@@ -57,7 +59,7 @@ namespace Games.Infraestructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("cod_Game");
+                        .HasColumnName("id_Game");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -67,7 +69,7 @@ namespace Games.Infraestructure.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnName("ind_Active");
+                        .HasColumnName("is_Active");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -83,7 +85,7 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnName("dat_Updated");
 
                     b.HasKey("Id")
-                        .HasName("cod_Game");
+                        .HasName("PK_Game");
 
                     b.ToTable("Tb_Game", (string)null);
                 });
@@ -92,7 +94,8 @@ namespace Games.Infraestructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_Plataform");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -105,7 +108,7 @@ namespace Games.Infraestructure.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnName("ind_Active");
+                        .HasColumnName("is_Active");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -116,7 +119,8 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("dat_Updated");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Plataform");
 
                     b.ToTable("Tb_Plataform", (string)null);
                 });
@@ -125,7 +129,8 @@ namespace Games.Infraestructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_Publisher");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -135,7 +140,7 @@ namespace Games.Infraestructure.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnName("ind_Active");
+                        .HasColumnName("is_Active");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -146,7 +151,8 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("dat_Updated");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Publisher");
 
                     b.ToTable("Tb_Publisher", (string)null);
                 });
@@ -155,7 +161,8 @@ namespace Games.Infraestructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_User");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -165,7 +172,7 @@ namespace Games.Infraestructure.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnName("ind_Active");
+                        .HasColumnName("is_Active");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -181,7 +188,8 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("dat_Updated");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_User");
 
                     b.ToTable("Tb_User", (string)null);
                 });
@@ -246,7 +254,8 @@ namespace Games.Infraestructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("HasBeaten")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("has_Beaten");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");

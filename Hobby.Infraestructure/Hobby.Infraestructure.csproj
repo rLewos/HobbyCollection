@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Hobby.Model\Hobby.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>

@@ -12,5 +12,9 @@ namespace Games.Model
         public string? Nickname { get; set; }
         public IList<Game>? GameList { get; set; }
         public IList<UserGame>? UserGameList { get; set; }
-    }
+		public override void Validate()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

@@ -16,5 +16,12 @@ namespace Games.Model
 
         public IList<User>? UserList { get; set; }
         public IList<UserGame>? UserGameList { get; set; }
-    }
+
+		public override void Validate()
+		{
+            if (string.IsNullOrEmpty(this.Name))
+                throw new Exception("Game's name is empty.");
+
+		}
+	}
 }

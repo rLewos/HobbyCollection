@@ -1,7 +1,7 @@
 ﻿using Games.Model;
 using Games.Service;
 using Games.Service.Interfaces;
-using Games.ViewModel;
+using HobbyCollection.Website.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Games.Controllers
@@ -35,10 +35,10 @@ namespace Games.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Detail(int? idGame) {
+        public IActionResult Detail(int? id) {
 
             GameViewModel vm = new GameViewModel();
-            vm.Game = _gameService.Get(idGame.Value);
+            vm.Game = _gameService.Get(id.Value);
 
             return View(vm);
         }
@@ -48,17 +48,17 @@ namespace Games.Controllers
             GameViewModel vm = new GameViewModel();
             vm.Game = _gameService.Get(idGame);
 
-            return View(vm);
+            return View("Add", vm);
         }
 
 		#endregion
 
 		[HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Save(GameViewModel vm) {
+        public IActionResult Save(GameViewModel vm) {
             _gameService.Save(vm.Game);
 
-            return Json(new { });
+            return RedirectToAction("List");
         }
 
 		[HttpPost]

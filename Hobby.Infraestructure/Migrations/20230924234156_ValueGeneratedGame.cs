@@ -3,95 +3,95 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Games.Infraestructure.Migrations
+namespace Hobby.Infraestructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class ValueGeneratedGame : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Developers",
+                name: "Tb_Developer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id_Developer = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    nm_Developer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    is_Active = table.Column<bool>(type: "bit", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Developers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Plataforms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Plataforms", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Publishers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Publishers", x => x.Id);
+                    table.PrimaryKey("PK_Developer", x => x.id_Developer);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tb_Game",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id_Game = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nm_Game = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     dat_Release = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ind_Active = table.Column<bool>(type: "bit", nullable: false),
+                    is_Active = table.Column<bool>(type: "bit", nullable: false),
                     dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("cod_Game", x => x.Id);
+                    table.PrimaryKey("PK_Game", x => x.id_Game);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Tb_Plataform",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id_Plataform = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nickname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    nm_Plataform = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    is_Active = table.Column<bool>(type: "bit", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Plataform", x => x.id_Plataform);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tb_Publisher",
+                columns: table => new
+                {
+                    id_Publisher = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nm_Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    is_Active = table.Column<bool>(type: "bit", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Publisher", x => x.id_Publisher);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tb_User",
+                columns: table => new
+                {
+                    id_User = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nm_User = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_Nickname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    is_Active = table.Column<bool>(type: "bit", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.id_User);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,16 +105,16 @@ namespace Games.Infraestructure.Migrations
                 {
                     table.PrimaryKey("PK_Tb_GameDeveloper", x => new { x.DeveloperListId, x.GameListId });
                     table.ForeignKey(
-                        name: "FK_Tb_GameDeveloper_Developers_DeveloperListId",
+                        name: "FK_Tb_GameDeveloper_Tb_Developer_DeveloperListId",
                         column: x => x.DeveloperListId,
-                        principalTable: "Developers",
-                        principalColumn: "Id",
+                        principalTable: "Tb_Developer",
+                        principalColumn: "id_Developer",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tb_GameDeveloper_Tb_Game_GameListId",
                         column: x => x.GameListId,
                         principalTable: "Tb_Game",
-                        principalColumn: "Id",
+                        principalColumn: "id_Game",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -129,16 +129,16 @@ namespace Games.Infraestructure.Migrations
                 {
                     table.PrimaryKey("PK_Tb_GamePlataform", x => new { x.GameListId, x.PlataformListId });
                     table.ForeignKey(
-                        name: "FK_Tb_GamePlataform_Plataforms_PlataformListId",
-                        column: x => x.PlataformListId,
-                        principalTable: "Plataforms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Tb_GamePlataform_Tb_Game_GameListId",
                         column: x => x.GameListId,
                         principalTable: "Tb_Game",
-                        principalColumn: "Id",
+                        principalColumn: "id_Game",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tb_GamePlataform_Tb_Plataform_PlataformListId",
+                        column: x => x.PlataformListId,
+                        principalTable: "Tb_Plataform",
+                        principalColumn: "id_Plataform",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -153,45 +153,45 @@ namespace Games.Infraestructure.Migrations
                 {
                     table.PrimaryKey("PK_Tb_GamePublisher", x => new { x.GameListId, x.PublisherListId });
                     table.ForeignKey(
-                        name: "FK_Tb_GamePublisher_Publishers_PublisherListId",
-                        column: x => x.PublisherListId,
-                        principalTable: "Publishers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Tb_GamePublisher_Tb_Game_GameListId",
                         column: x => x.GameListId,
                         principalTable: "Tb_Game",
-                        principalColumn: "Id",
+                        principalColumn: "id_Game",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tb_GamePublisher_Tb_Publisher_PublisherListId",
+                        column: x => x.PublisherListId,
+                        principalTable: "Tb_Publisher",
+                        principalColumn: "id_Publisher",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserGame",
+                name: "Tb_UserGame",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     GameId = table.Column<int>(type: "int", nullable: true),
-                    HasBeaten = table.Column<bool>(type: "bit", nullable: false),
+                    has_Beaten = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserGame", x => x.Id);
+                    table.PrimaryKey("PK_Tb_UserGame", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserGame_Tb_Game_GameId",
+                        name: "FK_Tb_UserGame_Tb_Game_GameId",
                         column: x => x.GameId,
                         principalTable: "Tb_Game",
-                        principalColumn: "Id");
+                        principalColumn: "id_Game");
                     table.ForeignKey(
-                        name: "FK_UserGame_Users_UserId",
+                        name: "FK_Tb_UserGame_Tb_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
+                        principalTable: "Tb_User",
+                        principalColumn: "id_User");
                 });
 
             migrationBuilder.CreateIndex(
@@ -210,13 +210,13 @@ namespace Games.Infraestructure.Migrations
                 column: "PublisherListId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGame_GameId",
-                table: "UserGame",
+                name: "IX_Tb_UserGame_GameId",
+                table: "Tb_UserGame",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGame_UserId",
-                table: "UserGame",
+                name: "IX_Tb_UserGame_UserId",
+                table: "Tb_UserGame",
                 column: "UserId");
         }
 
@@ -233,22 +233,22 @@ namespace Games.Infraestructure.Migrations
                 name: "Tb_GamePublisher");
 
             migrationBuilder.DropTable(
-                name: "UserGame");
+                name: "Tb_UserGame");
 
             migrationBuilder.DropTable(
-                name: "Developers");
+                name: "Tb_Developer");
 
             migrationBuilder.DropTable(
-                name: "Plataforms");
+                name: "Tb_Plataform");
 
             migrationBuilder.DropTable(
-                name: "Publishers");
+                name: "Tb_Publisher");
 
             migrationBuilder.DropTable(
                 name: "Tb_Game");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Tb_User");
         }
     }
 }
