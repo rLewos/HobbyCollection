@@ -2,11 +2,6 @@
 using Games.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games.Infraestructure
 {
@@ -25,8 +20,6 @@ namespace Games.Infraestructure
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			base.OnModelCreating(modelBuilder);
-
 			EntityTypeBuilder<Developer> etbDeveloper = modelBuilder.Entity<Developer>();
 			etbDeveloper.ToTable("Tb_Developer");
 			etbDeveloper.HasKey(e => e.Id).HasName("PK_Developer");
@@ -98,6 +91,7 @@ namespace Games.Infraestructure
 					 x => x.Property(e => e.HasBeaten).HasColumnName("has_Beaten")
 				);
 
+			base.OnModelCreating(modelBuilder);
 		}
 	}
 }

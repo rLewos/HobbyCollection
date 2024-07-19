@@ -32,6 +32,7 @@ namespace Games.Controllers
         {
             GameViewModel viewModel = new GameViewModel();
             viewModel.Game = new Game();
+
             return View(viewModel);
         }
 
@@ -55,9 +56,11 @@ namespace Games.Controllers
 
 		[HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(GameViewModel vm) {
+        public IActionResult Save(GameViewModel vm) 
+        {
+            
+            
             _gameService.Save(vm.Game);
-
             return RedirectToAction("List");
         }
 

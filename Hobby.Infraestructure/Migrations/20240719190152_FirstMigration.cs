@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Hobby.Infraestructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ValueGeneratedGame : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,12 +16,12 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_Developer",
                 columns: table => new
                 {
-                    id_Developer = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nm_Developer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    is_Active = table.Column<bool>(type: "bit", nullable: false),
-                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id_Developer = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nm_Developer = table.Column<string>(type: "text", nullable: false),
+                    is_Active = table.Column<bool>(type: "boolean", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,13 +32,13 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_Game",
                 columns: table => new
                 {
-                    id_Game = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nm_Game = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    dat_Release = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    is_Active = table.Column<bool>(type: "bit", nullable: false),
-                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id_Game = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nm_Game = table.Column<string>(type: "text", nullable: false),
+                    dat_Release = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    is_Active = table.Column<bool>(type: "boolean", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,13 +49,13 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_Plataform",
                 columns: table => new
                 {
-                    id_Plataform = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nm_Plataform = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    is_Active = table.Column<bool>(type: "bit", nullable: false),
-                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id_Plataform = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nm_Plataform = table.Column<string>(type: "text", nullable: false),
+                    Abbreviation = table.Column<string>(type: "text", nullable: true),
+                    is_Active = table.Column<bool>(type: "boolean", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,12 +66,12 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_Publisher",
                 columns: table => new
                 {
-                    id_Publisher = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nm_Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    is_Active = table.Column<bool>(type: "bit", nullable: false),
-                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id_Publisher = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nm_Publisher = table.Column<string>(type: "text", nullable: false),
+                    is_Active = table.Column<bool>(type: "boolean", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,13 +82,13 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_User",
                 columns: table => new
                 {
-                    id_User = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nm_User = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    nm_Nickname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    is_Active = table.Column<bool>(type: "bit", nullable: false),
-                    dat_Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dat_Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id_User = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nm_User = table.Column<string>(type: "text", nullable: false),
+                    nm_Nickname = table.Column<string>(type: "text", nullable: false),
+                    is_Active = table.Column<bool>(type: "boolean", nullable: false),
+                    dat_Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    dat_Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,8 +99,8 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_GameDeveloper",
                 columns: table => new
                 {
-                    DeveloperListId = table.Column<int>(type: "int", nullable: false),
-                    GameListId = table.Column<int>(type: "int", nullable: false)
+                    DeveloperListId = table.Column<int>(type: "integer", nullable: false),
+                    GameListId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,8 +123,8 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_GamePlataform",
                 columns: table => new
                 {
-                    GameListId = table.Column<int>(type: "int", nullable: false),
-                    PlataformListId = table.Column<int>(type: "int", nullable: false)
+                    GameListId = table.Column<int>(type: "integer", nullable: false),
+                    PlataformListId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,8 +147,8 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_GamePublisher",
                 columns: table => new
                 {
-                    GameListId = table.Column<int>(type: "int", nullable: false),
-                    PublisherListId = table.Column<int>(type: "int", nullable: false)
+                    GameListId = table.Column<int>(type: "integer", nullable: false),
+                    PublisherListId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,14 +171,14 @@ namespace Hobby.Infraestructure.Migrations
                 name: "Tb_UserGame",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    GameId = table.Column<int>(type: "int", nullable: true),
-                    has_Beaten = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    GameId = table.Column<int>(type: "integer", nullable: true),
+                    has_Beaten = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

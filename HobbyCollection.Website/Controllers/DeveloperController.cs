@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HobbyCollection.Website.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
@@ -22,5 +23,16 @@ namespace HobbyCollection.Website.Controllers
 		}
 
 		#endregion
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Save(DeveloperViewModel vm)
+		{
+
+
+			return View();
+		}
+
+
 	}
 }
