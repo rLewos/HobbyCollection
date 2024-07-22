@@ -1,0 +1,43 @@
+﻿@model HobbyCollection.Website.ViewModels.UserViewModel
+
+<form asp-action="Save" asp-controller="User" method="post" id="formUser">
+	<input asp-for="User.Id" type="hidden"/>
+
+	<label asp-for="User.Name" class="">Name: </label>
+	<input asp-for="User.Name" class=""/>
+
+	<label asp-for="User.Nickname" class="">Nickname: </label>
+	<input asp-for="User.Nickname" class="" />
+
+	<button type="submit">Save</button>
+	<button type="reset">Reset</button>
+</form>
+
+@section Scripts {
+	<script type="text/javascript">
+		$(() => {
+
+			$("#formUser").on("submit", (e) => {
+				e.preventDefault();
+				console.log("Sending user...");
+
+				const form = $("#formUser").serialize();
+				$.ajax({
+					url: "/User/Save",
+					type:"post",
+					data: form,
+					success: (data) => {
+
+					},
+					error: (error) => {
+
+					},
+					complete: () => {
+
+					}
+				})
+			});
+
+		})
+	</script>
+}

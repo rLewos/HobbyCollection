@@ -27,5 +27,12 @@ namespace HobbyCollection.Website.Controllers
 		}
 
 		#endregion
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Save()
+		{
+			return RedirectToAction("List");
+		}
 	}
 }

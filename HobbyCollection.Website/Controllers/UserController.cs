@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Games.Model;
+using HobbyCollection.Website.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
 	public class UserController : Controller
 	{
+        public static IList<User>? UserList { get; set; }
+
         public UserController()
         {
             
@@ -18,7 +22,10 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult List()
 		{
-			return View();
+			UserViewModel vm = new UserViewModel();
+			vm.UserList = UserList;
+
+			return View(vm);
 		}
 
 		public IActionResult Add()
@@ -27,5 +34,15 @@ namespace HobbyCollection.Website.Controllers
 		}
 
 		#endregion
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Save(UserViewModel vm)
+		{
+			vm.User.Validate();
+			UserList.Add(vm.User);
+
+			return RedirectToAction("List");
+		}
 	}
 }

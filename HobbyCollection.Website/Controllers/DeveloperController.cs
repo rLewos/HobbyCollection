@@ -30,7 +30,7 @@ namespace HobbyCollection.Website.Controllers
 		{
 
 
-			return View();
+			return RedirectToAction("List");
 		}
 
 
