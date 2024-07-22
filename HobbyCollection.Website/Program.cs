@@ -15,7 +15,7 @@ string? connectionString = builder.Configuration.GetConnectionString("Default");
 if (connectionString == null)
     throw new NullReferenceException("ConnectionString is null");
 
-builder.Services.AddDbContext<HobbyContext>(opt => opt.UseSqlServer(connectionString));
+builder.Services.AddDbContext<HobbyContext>(opt => opt.UseNpgsql(connectionString));
 
 
 builder.Services.AddTransient<IGameService, GameService>();
@@ -39,8 +39,5 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapControllerRoute(name: "default",   pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();

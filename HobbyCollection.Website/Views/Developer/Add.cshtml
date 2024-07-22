@@ -1,0 +1,14 @@
+﻿@model HobbyCollection.Website.ViewModels.DeveloperViewModel;
+
+<form asp-controller="Developer" asp-action="Save" method="post">
+	<input asp-for="Developer.Id" type="hidden"/>
+
+	<label asp-for="Developer.Name">Name: </label>
+	<input  asp-for="Developer.Name" type="text" />
+
+	<button id="btnSaveDeveloper" type="button">Save</button>
+</form>
+
+<script type="text/javascript">
+	console.log("Test");
+</script>

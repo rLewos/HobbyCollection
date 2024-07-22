@@ -10,5 +10,10 @@ namespace Games.Model
     {
         public Game? Game { get; set; }
         public Developer? Developer { get; set; }
-    }
+
+		public override void Validate()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

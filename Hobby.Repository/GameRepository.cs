@@ -1,11 +1,6 @@
 ﻿using Games.Infraestructure;
 using Games.Model;
 using Games.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games.Repository
 {
@@ -51,10 +46,14 @@ namespace Games.Repository
 			return _context.Games.SingleOrDefault(g => g.Id == id);
 		}
 
+		public Game? GetByName(string gameName)
+		{
+			return _context.Games.SingleOrDefault(g => g.Name == gameName);
+		}
+
 		public IList<Game> ListAll()
 		{
 			IList<Game> list = new List<Game>();
-
 			list = _context.Games.ToList();
 
 			return list;

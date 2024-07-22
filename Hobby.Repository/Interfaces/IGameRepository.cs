@@ -9,6 +9,7 @@ namespace Games.Repository.Interfaces
 {
 	public interface IGameRepository : IBaseRepository<Game>
 	{
+		Game? GetByName(string gameName);
 		IList<Game> ListAll();
 	}
 }

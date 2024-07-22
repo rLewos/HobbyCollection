@@ -1,18 +1,47 @@
-﻿@model Games.ViewModel.GameViewModel
+﻿@model HobbyCollection.Website.ViewModels.GameViewModel
 
-<form asp-controller="Game" asp-action="Save" method="post">
+<form asp-controller="Game" asp-action="Save" method="post" id="formGame">
 	<input type="hidden" asp-for="@Model.Game.Id" />
 
-	<div>
-		<label asp-for="@Model.Game.Name">Name: </label>
-		<input type="text" asp-for="@Model.Game.Name"/>
+	<div class="">
+		<label asp-for="@Model.Game.Name" class="form-label">Name: </label>
+		<input type="text" asp-for="@Model.Game.Name" class="form-control"/>
 	</div>
 
-	<div>
-		<label asp-for="@Model.Game.ReleaseDate">Release Date: </label>
-		<input type="date" asp-for="@Model.Game.ReleaseDate" />
+	<div class="">
+		<label asp-for="@Model.Game.ReleaseDate" class="form-label">Release Date: </label>
+		<input type="date" asp-for="@Model.Game.ReleaseDate" class="form-control" />
 	</div>
 
-	<button type="submit" class="btn btn-primary">Send</button>
+	<br />
+	<div class="">
+		<button type="button" id="btnSaveGame" class="btn btn-primary">Save</button>
+		<button type="reset" class="btn btn-warning">Reset</button>
+	</div>
 
 </form>
+
+@section Scripts {
+	<script type="text/javascript">
+		$(()=>{
+			
+			$("#btnSaveGame").on("click", ()=>{
+				const formGame = $("#formGame").serialize();
+				console.log(formGame);
+
+				$.ajax({
+					url: "/Game/Save",
+					type: "POST",
+					data: formGame,
+					success: (data) => {
+						console.log("HappyEnd");
+					},
+					error: () => {
+						console.log("BadEnd");
+					}
+				});
+
+			});
+		});
+	</script>
+}

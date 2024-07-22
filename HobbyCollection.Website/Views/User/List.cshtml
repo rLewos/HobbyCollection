@@ -1,0 +1,34 @@
+﻿@model HobbyCollection.Website.ViewModels.UserViewModel
+
+@if (Model.UserList != null && Model.UserList.Count > 0)
+{
+	<table>
+
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Nickname</th>
+				<th> - </th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var item in Model.UserList)
+			{
+				<tr>
+					<td>@item.Name</td>
+					<td>@item.Nickname</td>
+					<td>
+						<button type="button"><i>I</i> Edit</button>
+						<button type="button"><i>I</i> Remove</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+}
+else
+{
+	<p>There aren't any users.</p>
+}
