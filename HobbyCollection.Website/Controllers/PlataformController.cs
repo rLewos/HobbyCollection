@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hobby.Service.Interfaces;
+using HobbyCollection.Website.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
 	public class PlataformController : Controller
 	{
-        public PlataformController()
+		private readonly IPlataformService _plataformService;
+        public PlataformController(IPlataformService plataformService)
         {
-            
+            this._plataformService = plataformService;
         }
 
         #region Views
@@ -18,7 +21,9 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult List()
 		{
-			return View();
+			PlataformViewModel vm = new PlataformViewModel();
+
+			return View(vm);
 		}
 
 		public IActionResult Add()

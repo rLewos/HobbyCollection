@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model HobbyCollection.Website.ViewModels.PlataformViewModel
+
+@if (Model.PlataformList != null && Model.PlataformList.Count > 0)
+{
+	<table id="tablePlataform" class="table table-light">
+
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th> - </th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var item in Model.PlataformList)
+			{
+				<tr>
+					<td>@item.Name</td>
+					<td>
+						<button type="button"><i>I</i> Edit</button>
+						<button type="button"><i>I</i> Remove</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+}
+else
+{
+	<p>There aren't any platforms.</p>
+}
+
+
+@section Scripts {
+	<script type="text/javascript">
+		$(() => {
+			$("#tablePlataform");
+		});
+	</script>
 }

@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model HobbyCollection.Website.ViewModels.PublisherViewModel
+
+<form asp-action="Save" asp-controller="User" method="post" id="formPublisher" class="row g-3">
+	
+	<input asp-for="Publisher.Id" type="hidden" />
+
+	<div class="col-md-6">
+		<label asp-for="Publisher.Name" class="form-label">Name: </label>
+		<input asp-for="Publisher.Name" class="form-control" value="" />
+	</div>
+
+	<div class="col-md-12">
+		<button type="submit" class="btn btn-primary">Save</button>
+		<button type="reset" class="btn btn-warning">Reset</button>
+	</div>
+
+</form>
+
+@section Scripts {
+	<script type="text/javascript">
+		$(() => {
+
+			$("#formPublisher").on("submit", (e) => {
+				e.preventDefault();
+
+				const form = $("#formPublisher").serialize();
+				$.ajax({
+					url: "/Publisher/Save",
+					type: "POST",
+					data: form,
+					success: (data) => {
+						console.log(data);
+					},
+					error: (error) => {
+						console.error(error);
+					},
+					complete: () => {
+
+					}
+				})
+			});
+
+		})
+	</script>
 }

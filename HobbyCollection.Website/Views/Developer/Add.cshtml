@@ -1,14 +1,45 @@
-﻿@model HobbyCollection.Website.ViewModels.DeveloperViewModel;
+﻿@model HobbyCollection.Website.ViewModels.DeveloperViewModel
 
-<form asp-controller="Developer" asp-action="Save" method="post">
-	<input asp-for="Developer.Id" type="hidden"/>
+<form asp-action="Save" asp-controller="User" method="post" id="formPlataform" class="row g-3">
 
-	<label asp-for="Developer.Name">Name: </label>
-	<input  asp-for="Developer.Name" type="text" />
+	<input asp-for="Developer.Id" type="hidden" />
 
-	<button id="btnSaveDeveloper" type="button">Save</button>
+	<div class="col-md-6">
+		<label asp-for="Developer.Name" class="form-label">Name: </label>
+		<input asp-for="Developer.Name" class="form-control" value="" />
+	</div>
+
+	<div class="col-md-12">
+		<button type="submit" class="btn btn-primary">Save</button>
+		<button type="reset" class="btn btn-warning">Reset</button>
+	</div>
+
 </form>
 
-<script type="text/javascript">
-	console.log("Test");
-</script>
+@section Scripts {
+	<script type="text/javascript">
+		$(() => {
+
+			$("#formDeveloper").on("submit", (e) => {
+				e.preventDefault();
+
+				const form = $("#formDeveloper").serialize();
+				$.ajax({
+					url: "/Developer/Save",
+					type: "POST",
+					data: form,
+					success: (data) => {
+						console.log(data);
+					},
+					error: (error) => {
+						console.error(error);
+					},
+					complete: () => {
+
+					}
+				})
+			});
+
+		})
+	</script>
+}

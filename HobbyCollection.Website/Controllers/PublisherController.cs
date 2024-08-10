@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hobby.Service.Interfaces;
+using HobbyCollection.Website.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
 	public class PublisherController : Controller
 	{
-        public PublisherController()
+		private readonly IPublisherService _publisherService;
+		public PublisherController(IPublisherService publisherService)
         {
-            
+            this._publisherService = publisherService;
         }
         #region Views
 
@@ -17,7 +20,9 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult List()
 		{
-			return View();
+			PublisherViewModel vm = new PublisherViewModel();
+
+			return View(vm);
 		}
 
 		public IActionResult Add()

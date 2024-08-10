@@ -2,7 +2,7 @@
 
 @if (Model.UserList != null && Model.UserList.Count > 0)
 {
-	<table>
+	<table id="tableUser" class="table table-light">
 
 		<thead>
 			<tr>
@@ -31,4 +31,13 @@
 else
 {
 	<p>There aren't any users.</p>
+}
+
+
+@section Scripts{
+	<script type="text/javascript">
+		$(() => {
+			$("#tableUser");
+		});
+	</script>
 }
