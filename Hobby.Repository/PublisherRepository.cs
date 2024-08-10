@@ -1,11 +1,7 @@
 ﻿using Games.Infraestructure;
 using Games.Model;
 using Games.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hobby.Repository.Interfaces;
 
 namespace Hobby.Repository
 {

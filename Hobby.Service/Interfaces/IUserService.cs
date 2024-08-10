@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Games.Model;
+using Games.Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Hobby.Service.Interfaces
 {
-	internal interface IUserService
+	public  interface IUserService : IBaseService<User>
 	{
+		IList<User> ListAll();
 	}
 }

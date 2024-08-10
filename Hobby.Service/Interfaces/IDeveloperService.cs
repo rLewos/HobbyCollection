@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hobby.Service.Interfaces
 {
-	internal interface IDeveloperService
+	public interface IDeveloperService
 	{
+
 	}
 }

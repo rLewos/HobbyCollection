@@ -1,19 +1,18 @@
 ﻿using Games.Model;
 using Games.Service.Interfaces;
+using Hobby.Repository.Interfaces;
 using Hobby.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hobby.Service
 {
 	public class UserService : IBaseService<User>, IUserService
 	{
+		private readonly IUserRepository _userRepository;
 
-
-		public UserService() { }
+		public UserService(IUserRepository userRepository)
+		{
+			_userRepository = userRepository;
+		}
 
 		public void Delete(int? codObj)
 		{
@@ -25,9 +24,23 @@ namespace Hobby.Service
 			throw new NotImplementedException();
 		}
 
+		public IList<User> ListAll()
+		{
+			return _userRepository.ListAll();
+		}
+
 		public void Save(User obj)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				obj.Validate();
+				_userRepository.Add(obj);
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
 		}
 
 		public void Update(User obj)

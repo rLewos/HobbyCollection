@@ -1,11 +1,7 @@
 ﻿using Games.Infraestructure;
 using Games.Model;
 using Games.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hobby.Repository.Interfaces;
 
 namespace Hobby.Repository
 {
@@ -25,7 +21,7 @@ namespace Hobby.Repository
 				_context.Users.Add(entity);
 				_context.SaveChanges();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				throw;
 			}
@@ -38,7 +34,7 @@ namespace Hobby.Repository
 				_context.Users.Remove(entity);
 				_context.SaveChanges();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				throw;
 			}

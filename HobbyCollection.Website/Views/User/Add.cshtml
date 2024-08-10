@@ -1,16 +1,22 @@
 ﻿@model HobbyCollection.Website.ViewModels.UserViewModel
 
-<form asp-action="Save" asp-controller="User" method="post" id="formUser">
-	<input asp-for="User.Id" type="hidden"/>
+<form asp-action="Save" asp-controller="User" method="post" id="formUser" class="row g-3">
+	<input asp-for="User.Id" type="hidden" />
 
-	<label asp-for="User.Name" class="">Name: </label>
-	<input asp-for="User.Name" class=""/>
+	<div class="col-md-6">
+		<label asp-for="User.Name" class="form-label">Name: </label>
+		<input asp-for="User.Name" class="form-control" value=""/>
+	</div>
 
-	<label asp-for="User.Nickname" class="">Nickname: </label>
-	<input asp-for="User.Nickname" class="" />
+	<div class="col-md-6">
+		<label asp-for="User.Nickname" class="form-label">Nickname: </label>
+		<input asp-for="User.Nickname" class="form-control"  value=""/>
+	</div>
 
-	<button type="submit">Save</button>
-	<button type="reset">Reset</button>
+	<div class="col-md-12">
+		<button type="submit" class="btn btn-primary">Save</button>
+		<button type="reset" class="btn btn-warning">Reset</button>
+	</div>
 </form>
 
 @section Scripts {
@@ -19,18 +25,17 @@
 
 			$("#formUser").on("submit", (e) => {
 				e.preventDefault();
-				console.log("Sending user...");
 
 				const form = $("#formUser").serialize();
 				$.ajax({
 					url: "/User/Save",
-					type:"post",
+					type: "POST",
 					data: form,
 					success: (data) => {
-
+						console.log(data);
 					},
 					error: (error) => {
-
+						console.error(error);
 					},
 					complete: () => {
 

@@ -1,4 +1,5 @@
 ﻿using Games.Model;
+using Hobby.Service.Interfaces;
 using HobbyCollection.Website.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,16 +7,16 @@ namespace HobbyCollection.Website.Controllers
 {
 	public class UserController : Controller
 	{
-        public static IList<User>? UserList { get; set; }
+		private readonly IUserService _userService;
 
-        public UserController()
-        {
-            
-        }
+		public UserController(IUserService userService)
+		{
+			this._userService = userService;
+		}
 
-        #region Views
+		#region Views
 
-        public IActionResult Index()
+		public IActionResult Index()
 		{
 			return RedirectToAction("List");
 		}
@@ -23,7 +24,7 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult List()
 		{
 			UserViewModel vm = new UserViewModel();
-			vm.UserList = UserList;
+			vm.UserList = _userService.ListAll();
 
 			return View(vm);
 		}
@@ -39,10 +40,18 @@ namespace HobbyCollection.Website.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Save(UserViewModel vm)
 		{
-			vm.User.Validate();
-			UserList.Add(vm.User);
+			IList<User> users = new List<User>();
 
-			return RedirectToAction("List");
+			try
+			{
+				_userService.Save(vm.User);
+			}
+			catch (Exception e)
+			{
+				return Json(new { success = false, message = "User couldn't be saved." });
+			}
+			
+			return Json(new { success = true, message = "User has been saved successfully." });
 		}
 	}
 }

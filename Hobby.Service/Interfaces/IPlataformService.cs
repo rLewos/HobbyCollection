@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hobby.Service.Interfaces
 {
-	internal interface IPlataformService
+	public interface IPlataformService
 	{
 	}
 }

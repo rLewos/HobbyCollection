@@ -1,20 +1,19 @@
 ﻿@model HobbyCollection.Website.ViewModels.GameViewModel
 
-<form asp-controller="Game" asp-action="Save" method="post" id="formGame">
-	<input type="hidden" asp-for="@Model.Game.Id" />
+<form asp-controller="Game" asp-action="Save" method="POST" id="formGame" class="row g-3">
+	<input type="hidden" asp-for="Game.Id" />
 
-	<div class="">
-		<label asp-for="@Model.Game.Name" class="form-label">Name: </label>
-		<input type="text" asp-for="@Model.Game.Name" class="form-control"/>
+	<div class="col-md-6">
+		<label asp-for="Game.Name" class="form-label">Name: </label>
+		<input type="text" asp-for="Game.Name" class="form-control"/>
 	</div>
 
-	<div class="">
-		<label asp-for="@Model.Game.ReleaseDate" class="form-label">Release Date: </label>
-		<input type="date" asp-for="@Model.Game.ReleaseDate" class="form-control" />
+	<div class="col-md-2">
+		<label asp-for="Game.ReleaseDate" class="form-label">Release Date: </label>
+		<input type="date" asp-for="Game.ReleaseDate" class="form-control" />
 	</div>
 
-	<br />
-	<div class="">
+	<div class="col-md-12">
 		<button type="button" id="btnSaveGame" class="btn btn-primary">Save</button>
 		<button type="reset" class="btn btn-warning">Reset</button>
 	</div>

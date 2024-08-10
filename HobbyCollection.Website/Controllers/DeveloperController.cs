@@ -1,11 +1,17 @@
-﻿using HobbyCollection.Website.ViewModels;
+﻿using Hobby.Service.Interfaces;
+using HobbyCollection.Website.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
 	public class DeveloperController : Controller
 	{
-		public DeveloperController() { }
+		private readonly IDeveloperService _developerService;
+
+		public DeveloperController(IDeveloperService developerService)
+		{
+			this._developerService = developerService;
+		}
 
 		#region Views
 
@@ -14,11 +20,14 @@ namespace HobbyCollection.Website.Controllers
 			return RedirectToAction("List");
 		}
 
-		public IActionResult List() { 
-			return View();
+		public IActionResult List()
+		{
+			DeveloperViewModel vm = new DeveloperViewModel();
+			return View(vm);
 		}
 
-		public IActionResult Add() {
+		public IActionResult Add()
+		{
 			return View();
 		}
 
