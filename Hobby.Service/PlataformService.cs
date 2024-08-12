@@ -19,23 +19,17 @@ namespace Hobby.Service
 			this._plataformRepository = plataformRepository;
 		}
 
-
-		public void Delete(int? codObj)
+		public void Delete(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Plataform? Get(int? codObj)
+		public Plataform? GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
 		public void Save(Plataform obj)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Update(Plataform obj)
 		{
 			throw new NotImplementedException();
 		}

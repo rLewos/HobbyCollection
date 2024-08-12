@@ -23,12 +23,24 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult List()
 		{
 			DeveloperViewModel vm = new DeveloperViewModel();
+			vm.DeveloperList = _developerService.ListAll();
+
 			return View(vm);
 		}
 
 		public IActionResult Add()
 		{
-			return View();
+			DeveloperViewModel vm = new DeveloperViewModel();
+			return View(vm);
+		}
+
+		public IActionResult Edit(int id)
+		{
+			DeveloperViewModel vm = new DeveloperViewModel();
+			vm.Developer = _developerService.GetById(id);
+
+
+			return View(vm);
 		}
 
 		#endregion
@@ -37,11 +49,26 @@ namespace HobbyCollection.Website.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Save(DeveloperViewModel vm)
 		{
-
+			_developerService.Save(vm.Developer);
 
 			return RedirectToAction("List");
 		}
 
+		[HttpDelete]
+		public IActionResult Delete(int id)
+		{
+			try
+			{
+				_developerService.Delete(id);
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
+
+			return Json(new { });
+		}
 
 	}
 }

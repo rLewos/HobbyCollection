@@ -17,8 +17,8 @@
 				<tr>
 					<td>@item.Name</td>
 					<td>
-						<button type="button"><i>I</i> Edit</button>
-						<button type="button"><i>I</i> Remove</button>
+						<button type="button" class="btn btn-primary" id="btnEdit"><i></i> Edit</button>
+						<button type="button" class="btn btn-danger" id="btnRemove"><i></i> Remove</button>
 					</td>
 				</tr>
 			}
@@ -33,6 +33,7 @@ else
 
 
 @section Scripts {
+	<script type="text/javascript" src="~/js/views/DeveloperList.js"></script>
 	<script type="text/javascript">
 		$(() => {
 			$("#tableDeveloper");

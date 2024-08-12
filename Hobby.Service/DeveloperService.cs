@@ -14,25 +14,37 @@ namespace Hobby.Service
 			this._developerRepository = developerRepository;
 		}
 
+		public void Delete(int id)
+		{
+			try
+			{
+				Developer? developer = _developerRepository.Get(id);
 
-		public void Delete(int? codObj)
+				if (developer == null)
+					throw new Exception("There's no developer to remove.");
+
+				_developerRepository.Delete(developer);
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
+		}
+
+		public Developer? GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Developer? Get(int? codObj)
+		public IList<Developer> ListAll()
 		{
-			throw new NotImplementedException();
+			return _developerRepository.ListAll();
 		}
 
 		public void Save(Developer obj)
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Update(Developer obj)
-		{
-			throw new NotImplementedException();
+			_developerRepository.Add(obj);
 		}
 
 		public void Validate(Developer t)

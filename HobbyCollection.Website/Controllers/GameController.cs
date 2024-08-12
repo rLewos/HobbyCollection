@@ -39,7 +39,7 @@ namespace Games.Controllers
         public IActionResult Detail(int? id) {
 
             GameViewModel vm = new GameViewModel();
-            vm.Game = _gameService.Get(id.Value);
+            vm.Game = _gameService.GetById(id.Value);
 
             return View(vm);
         }
@@ -47,7 +47,7 @@ namespace Games.Controllers
         public IActionResult Edit(int? idGame)
         {
             GameViewModel vm = new GameViewModel();
-            vm.Game = _gameService.Get(idGame);
+            vm.Game = _gameService.GetById(idGame.Value);
 
             return View("Add", vm);
         }
@@ -67,7 +67,7 @@ namespace Games.Controllers
 		[HttpPost]
 		public IActionResult Delete(int? idGame)
 		{
-			_gameService.Delete(null);
+			_gameService.Delete(idGame.Value);
 
 			return View();
 		}
