@@ -1,13 +1,14 @@
 ﻿using Games.Model;
 using Games.Service;
 using Games.Service.Interfaces;
+using HobbyCollection.Website.Controllers;
 using HobbyCollection.Website.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Games.Controllers
 {
-    public class GameController : Controller
-    {
+    public class GameController : BaseController
+	{
         private IGameService _gameService;
 
         public GameController(IGameService gameService) {
@@ -23,7 +24,7 @@ namespace Games.Controllers
 
         public IActionResult List() {
             GameViewModel vm = new GameViewModel();
-            vm.GameList = _gameService.List();
+            vm.GameList = _gameService.ListAll();
 
             return View(vm);
         }
@@ -39,7 +40,7 @@ namespace Games.Controllers
         public IActionResult Detail(int? id) {
 
             GameViewModel vm = new GameViewModel();
-            vm.Game = _gameService.Get(id.Value);
+            vm.Game = _gameService.GetById(id.Value);
 
             return View(vm);
         }
@@ -47,7 +48,7 @@ namespace Games.Controllers
         public IActionResult Edit(int? idGame)
         {
             GameViewModel vm = new GameViewModel();
-            vm.Game = _gameService.Get(idGame);
+            vm.Game = _gameService.GetById(idGame.Value);
 
             return View("Add", vm);
         }
@@ -67,7 +68,7 @@ namespace Games.Controllers
 		[HttpPost]
 		public IActionResult Delete(int? idGame)
 		{
-			_gameService.Delete(null);
+			_gameService.Delete(idGame.Value);
 
 			return View();
 		}

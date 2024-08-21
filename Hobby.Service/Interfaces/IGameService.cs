@@ -10,6 +10,6 @@ namespace Games.Service.Interfaces
 	public interface IGameService : IBaseService<Game>
     {
 		Game? GetByName(string gameName);
-		public IList<Game> List();
+		IList<Game> ListAll();
     }
 }

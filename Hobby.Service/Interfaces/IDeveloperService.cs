@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Games.Model;
+using Games.Service.Interfaces;
 
 namespace Hobby.Service.Interfaces
 {
-	public interface IDeveloperService
+	public interface IDeveloperService : IBaseService<Developer>
 	{
-
+		IList<Developer> ListAll();
 	}
 }

@@ -14,12 +14,12 @@ namespace Hobby.Service
 			_userRepository = userRepository;
 		}
 
-		public void Delete(int? codObj)
+		public void Delete(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public User? Get(int? codObj)
+		public User? GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
@@ -41,11 +41,6 @@ namespace Hobby.Service
 
 				throw;
 			}
-		}
-
-		public void Update(User obj)
-		{
-			throw new NotImplementedException();
 		}
 
 		public void Validate(User t)

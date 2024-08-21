@@ -13,40 +13,32 @@ namespace Games.Service
             _gameRepository = gameRepository;
         }
 
-		public void Delete(int? codObj)
+		public void Delete(int id)
 		{
-            try
-            {
-				if (!codObj.HasValue)
-					throw new ArgumentNullException(nameof(codObj));
-
-				Game? game = this.Get(codObj);
-
-                _gameRepository.Delete(game);
+			try
+			{
+				Game? game = this.GetById(id);
+				_gameRepository.Delete(game);
 			}
-            catch (Exception e)
-            {
-                throw;
-            }
+			catch (Exception e)
+			{
+				throw;
+			}
 		}
 
-		public Game? Get(int? codObj)
-        {
-            try
-            {
-                if (!codObj.HasValue)
-                    throw new ArgumentNullException(nameof(codObj));
-
-				Game? returnGame = _gameRepository.Get(codObj.Value);
-
+		public Game? GetById(int id)
+		{
+			try
+			{
+				Game? returnGame = _gameRepository.Get(id);
 				return returnGame;
 			}
-            catch (Exception e)
-            {
+			catch (Exception e)
+			{
 
-                throw;
-            }
-        }
+				throw;
+			}
+		}
 
 		public Game? GetByName(string? gameName)
 		{
@@ -58,12 +50,12 @@ namespace Games.Service
             return gameReturn;
 		}
 
-		public IList<Game> List()
-        {
-            return _gameRepository.ListAll();
-        }
+		public IList<Game> ListAll()
+		{
+			return _gameRepository.ListAll();
+		}
 
-        public void Save(Game obj)
+		public void Save(Game obj)
         {
             try
             {
@@ -85,11 +77,6 @@ namespace Games.Service
 
                 throw e;
             }
-        }
-
-        public void Update(Game obj)
-        {
-            throw new NotImplementedException();
         }
 
         public void Validate(Game game) {

@@ -19,23 +19,17 @@ namespace Hobby.Service
             this._publisherRepository = publisherRepository;
         }
 
-
-        public void Delete(int? codObj)
+		public void Delete(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Publisher? Get(int? codObj)
+		public Publisher? GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
 		public void Save(Publisher obj)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Update(Publisher obj)
 		{
 			throw new NotImplementedException();
 		}

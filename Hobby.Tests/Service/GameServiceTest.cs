@@ -48,7 +48,7 @@ namespace Hobby.Tests.Service
 
             game.Name = "Game test v2";
             _gameService.Save(game);
-            Game returnedGame = _gameService.Get(game.Id);
+            Game returnedGame = _gameService.GetById(game.Id);
 
             Assert.Equal(game.Name, returnedGame.Name);
         }
@@ -67,7 +67,7 @@ namespace Hobby.Tests.Service
             _gameService.Save(game);
 
 			// Act
-			game = _gameService.Get(game.Id);
+			game = _gameService.GetById(game.Id);
 
             // Asset
             Assert.NotNull(game);
@@ -88,7 +88,7 @@ namespace Hobby.Tests.Service
         {
             //Arrange
             //Act
-            IList<Game>? gameList = _gameService.List();
+            IList<Game>? gameList = _gameService.ListAll();
 
             // Assert
             Assert.NotNull(gameList);
@@ -103,7 +103,7 @@ namespace Hobby.Tests.Service
 
             // Act
             _gameService.Delete(game.Id);
-            Game? gameAssert = _gameService.Get(game.Id);
+            Game? gameAssert = _gameService.GetById(game.Id);
 
             // Assert
             Assert.Null(gameAssert);

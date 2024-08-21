@@ -9,9 +9,8 @@ namespace Games.Service.Interfaces
     public interface IBaseService<T>
     {
         public void Save(T obj);
-        public void Update(T obj);
-        public void Delete(int? codObj);
-        public T? Get(int? codObj);
-        public void Validate(T t);
+        public void Delete(int id);
+        public T? GetById(int id);
+        public void Validate(T type);
     }
 }

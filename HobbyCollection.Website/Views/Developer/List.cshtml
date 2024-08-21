@@ -14,11 +14,11 @@
 		<tbody>
 			@foreach (var item in Model.DeveloperList)
 			{
-				<tr>
+				<tr itemid="@item.Id">
 					<td>@item.Name</td>
 					<td>
-						<button type="button"><i>I</i> Edit</button>
-						<button type="button"><i>I</i> Remove</button>
+						<button type="button" class="btn btn-primary" id="btnEdit"><i class=""></i> Edit</button>
+						<button type="button" class="btn btn-danger" id="btnRemove"><i class=""></i> Remove</button>
 					</td>
 				</tr>
 			}
@@ -28,14 +28,10 @@
 }
 else
 {
-	<p>There aren't any developer.</p>
+	<p>There aren't any developers.</p>
 }
 
 
 @section Scripts {
-	<script type="text/javascript">
-		$(() => {
-			$("#tableDeveloper");
-		});
-	</script>
+	<script type="text/javascript" src="~/js/views/DeveloperList.js"></script>
 }

@@ -34,7 +34,7 @@ namespace Hobby.Repository
 				_context.Developers.Remove(entity);
 				_context.SaveChanges();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				throw;
 			}
