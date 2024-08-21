@@ -1,13 +1,14 @@
 ﻿using Games.Model;
 using Games.Service;
 using Games.Service.Interfaces;
+using HobbyCollection.Website.Controllers;
 using HobbyCollection.Website.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Games.Controllers
 {
-    public class GameController : Controller
-    {
+    public class GameController : BaseController
+	{
         private IGameService _gameService;
 
         public GameController(IGameService gameService) {
@@ -23,7 +24,7 @@ namespace Games.Controllers
 
         public IActionResult List() {
             GameViewModel vm = new GameViewModel();
-            vm.GameList = _gameService.List();
+            vm.GameList = _gameService.ListAll();
 
             return View(vm);
         }

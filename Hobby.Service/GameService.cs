@@ -50,12 +50,12 @@ namespace Games.Service
             return gameReturn;
 		}
 
-		public IList<Game> List()
-        {
-            return _gameRepository.ListAll();
-        }
+		public IList<Game> ListAll()
+		{
+			return _gameRepository.ListAll();
+		}
 
-        public void Save(Game obj)
+		public void Save(Game obj)
         {
             try
             {

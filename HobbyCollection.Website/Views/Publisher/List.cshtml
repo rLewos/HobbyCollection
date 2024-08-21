@@ -14,7 +14,7 @@
 		<tbody>
 			@foreach (var item in Model.PublisherList)
 			{
-				<tr>
+				<tr itemid="@item.Id">
 					<td>@item.Name</td>
 					<td>
 						<button type="button"><i>I</i> Edit</button>

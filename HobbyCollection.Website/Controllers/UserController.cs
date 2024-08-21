@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
-	public class UserController : Controller
+	public class UserController : BaseController
 	{
 		private readonly IUserService _userService;
 
@@ -32,6 +32,14 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult Add()
 		{
 			return View();
+		}
+
+		public IActionResult Edit(int id) {
+
+			UserViewModel vm = new UserViewModel();
+			vm.User = _userService.GetById(id);
+
+			return View("Add", vm);
 		}
 
 		#endregion

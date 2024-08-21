@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
-	public class DeveloperController : Controller
+	public class DeveloperController : BaseController
 	{
 		private readonly IDeveloperService _developerService;
 

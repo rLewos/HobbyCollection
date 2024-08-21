@@ -1,14 +1,6 @@
 using Games.Infraestructure;
-using Games.Repository;
-using Games.Repository.Interfaces;
-using Games.Service;
-using Games.Service.Interfaces;
-using Hobby.Repository;
-using Hobby.Repository.Interfaces;
-using Hobby.Service;
-using Hobby.Service.Interfaces;
+using HobbyCollection.Website;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,20 +13,8 @@ if (connectionString == null)
 
 builder.Services.AddDbContext<HobbyContext>(opt => opt.UseNpgsql(connectionString));
 
-builder.Services.AddTransient<IGameService, GameService>();
-builder.Services.AddTransient<IGameRepository, GameRepository>();
-
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-
-builder.Services.AddTransient<IDeveloperService, DeveloperService>();
-builder.Services.AddTransient<IDeveloperRepository, DeveloperRepository>();
-
-builder.Services.AddTransient<IPublisherService, PublisherService>();
-builder.Services.AddTransient<IPublisherRepository, PublisherRepository>();
-
-builder.Services.AddTransient<IPlataformService, PlataformService>();
-builder.Services.AddTransient<IPlataformRepository, PlataformRepository>();
+InjectionDependeceMapping idMapping = new (builder.Services) ;
+idMapping.Init();
 
 var app = builder.Build();
 

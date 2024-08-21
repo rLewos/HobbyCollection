@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
-	public class PublisherController : Controller
+	public class PublisherController : BaseController
 	{
 		private readonly IPublisherService _publisherService;
 		public PublisherController(IPublisherService publisherService)

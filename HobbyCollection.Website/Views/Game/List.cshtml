@@ -15,7 +15,7 @@
 			<tbody>
 				@foreach (var item in Model.GameList)
 				{
-					<tr>
+					<tr itemid="@item.Id">
 						<td>@item.Id</td>
 						<td><a asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></td>
 						<td>@item.ReleaseDate.ToString()</td>

@@ -1,7 +1,7 @@
 ﻿$(() => {
     console.log("Eu DeveloperList");
 
-    $("#btnEdit").on("click", () => {
+    $("#btnEdit").on("click", (element) => {
         console.log("Edit");
 
         //$.ajax({
@@ -21,8 +21,10 @@
 
     });
 
-    $("#btnRemove").on("click", () => {
+    $("#btnRemove").on("click", (element) => {
         console.log("Remove");
+
+        const id = $(element);
 
         $.ajax({
             url: "/Developer/Delete",

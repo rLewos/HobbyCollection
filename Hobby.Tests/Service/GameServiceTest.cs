@@ -88,7 +88,7 @@ namespace Hobby.Tests.Service
         {
             //Arrange
             //Act
-            IList<Game>? gameList = _gameService.List();
+            IList<Game>? gameList = _gameService.ListAll();
 
             // Assert
             Assert.NotNull(gameList);

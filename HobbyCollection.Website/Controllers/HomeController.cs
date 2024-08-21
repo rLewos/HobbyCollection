@@ -1,11 +1,12 @@
 ﻿using Games.Models;
+using HobbyCollection.Website.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Games.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class HomeController : BaseController
+	{
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

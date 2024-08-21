@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
-	public class PlataformController : Controller
+	public class PlataformController : BaseController
 	{
 		private readonly IPlataformService _plataformService;
         public PlataformController(IPlataformService plataformService)
