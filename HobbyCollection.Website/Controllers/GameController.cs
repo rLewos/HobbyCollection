@@ -59,10 +59,16 @@ namespace Games.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Save(GameViewModel vm) 
         {
-            
-            
-            _gameService.Save(vm.Game);
-            return RedirectToAction("List");
+            try
+            {
+				_gameService.Save(vm.Game);
+			}
+			catch (Exception e)
+			{
+				return this.Json(false, "Game couldn't be saved.");
+			}
+
+			return this.Json(true, "Game has been saved sucessfully.");
         }
 
 		[HttpPost]

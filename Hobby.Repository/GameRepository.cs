@@ -13,20 +13,6 @@ namespace Games.Repository
 			_context = hobbyContext;	
 		}
 
-		public void Add(Game entity)
-		{
-			try
-			{
-				_context.Games.Add(entity);
-				_context.SaveChanges();
-			}
-			catch (Exception e)
-			{
-				
-				throw;
-			}
-		}
-
 		public void Delete(Game? entity)
 		{
 			try
@@ -59,9 +45,21 @@ namespace Games.Repository
 			return list;
 		}
 
-		public void Update(Game entity)
+		public void Save(Game entity)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				if (entity.Id > 0)
+					_context.Games.Update(entity);
+				else
+					_context.Games.Add(entity);
+
+				_context.SaveChanges();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 	}
 }

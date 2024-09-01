@@ -14,19 +14,6 @@ namespace Hobby.Repository
 			_context = hobbyContext;
 		}
 
-		public void Add(Plataform entity)
-		{
-			try
-			{
-				_context.Plataforms.Add(entity);
-				_context.SaveChanges();
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
-
 		public void Delete(Plataform entity)
 		{
 			try
@@ -55,9 +42,21 @@ namespace Hobby.Repository
 			return _context.Plataforms.ToList();
 		}
 
-		public void Update(Plataform entity)
+		public void Save(Plataform entity)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				if(entity.Id > 0)
+					_context.Plataforms.Update(entity);
+				else 
+					_context.Plataforms.Add(entity);
+
+				_context.SaveChanges();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 	}
 }

@@ -49,9 +49,16 @@ namespace HobbyCollection.Website.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Save(DeveloperViewModel vm)
 		{
-			_developerService.Save(vm.Developer);
+			try
+			{
+				_developerService.Save(vm.Developer);
+			}
+			catch (Exception e)
+			{
+				return this.Json(false, "Developer couldn't be saved.");
+			}
 
-			return RedirectToAction("List");
+			return this.Json(true, "Developer has been saved sucessfully.");
 		}
 
 		[HttpDelete]

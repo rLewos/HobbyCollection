@@ -29,9 +29,22 @@ namespace Hobby.Service
 			throw new NotImplementedException();
 		}
 
+		public IList<Plataform>? ListAll()
+		{
+			return _plataformRepository.ListAll();
+		}
+
 		public void Save(Plataform obj)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				_plataformRepository.Save(obj);
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
 		}
 
 		public void Validate(Plataform t)

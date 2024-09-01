@@ -29,9 +29,14 @@ namespace Hobby.Service
 			throw new NotImplementedException();
 		}
 
+		public IList<Publisher>? ListAll()
+		{
+			return _publisherRepository.ListAll();
+		}
+
 		public void Save(Publisher obj)
 		{
-			throw new NotImplementedException();
+			_publisherRepository.Save(obj);	
 		}
 
 		public void Validate(Publisher t)

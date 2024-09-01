@@ -67,10 +67,7 @@ namespace Games.Service
                 obj.UpdatedDate = DateTime.Now;
                 obj.IsActive = true;
 
-                if (obj.Id <= 0)
-                    _gameRepository.Add(obj);
-                else
-                    _gameRepository.Update(obj);
+                _gameRepository.Save(obj);
 			}
             catch (Exception e)
             {

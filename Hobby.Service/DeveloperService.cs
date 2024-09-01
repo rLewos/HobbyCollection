@@ -44,7 +44,7 @@ namespace Hobby.Service
 
 		public void Save(Developer obj)
 		{
-			_developerRepository.Add(obj);
+			_developerRepository.Save(obj);
 		}
 
 		public void Validate(Developer t)

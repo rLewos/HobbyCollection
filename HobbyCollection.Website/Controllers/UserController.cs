@@ -48,18 +48,16 @@ namespace HobbyCollection.Website.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Save(UserViewModel vm)
 		{
-			IList<User> users = new List<User>();
-
 			try
 			{
 				_userService.Save(vm.User);
 			}
 			catch (Exception e)
 			{
-				return Json(new { success = false, message = "User couldn't be saved." });
+				return this.Json(false, "User couldn't be saved." );
 			}
-			
-			return Json(new { success = true, message = "User has been saved successfully." });
+
+			return this.Json(true, "User has been saved successfully.");
 		}
 	}
 }

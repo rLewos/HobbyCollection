@@ -10,5 +10,6 @@ namespace Hobby.Service.Interfaces
 {
 	public interface IPlataformService : IBaseService<Plataform>
 	{
+		IList<Plataform>? ListAll();
 	}
 }

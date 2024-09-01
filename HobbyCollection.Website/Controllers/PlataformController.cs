@@ -22,6 +22,7 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult List()
 		{
 			PlataformViewModel vm = new PlataformViewModel();
+			vm.PlataformList = _plataformService.ListAll();
 
 			return View(vm);
 		}
@@ -35,9 +36,18 @@ namespace HobbyCollection.Website.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Save()
+		public IActionResult Save(PlataformViewModel vm)
 		{
-			return RedirectToAction("List");
+			try
+			{
+				_plataformService.Save(vm.Plataform);
+			}
+			catch (Exception e)
+			{
+				return this.Json(false, "Plataform couldn't be saved.");
+			}
+
+			return this.Json(true, "Plataform has been saved sucessfully.");
 		}
 	}
 }
