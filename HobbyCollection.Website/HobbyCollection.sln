@@ -28,9 +28,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hobby.Repository", "..\Hobb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hobby.Infraestructure", "..\Hobby.Infraestructure\Hobby.Infraestructure.csproj", "{00814850-B7C0-475A-A675-BDE60A5563A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyCollection.API", "..\HobbyCollection.API\HobbyCollection.API.csproj", "{7FE53782-1514-4CC5-83D0-E323B992F4C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyCollection.API", "..\HobbyCollection.API\HobbyCollection.API.csproj", "{7FE53782-1514-4CC5-83D0-E323B992F4C5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{69A48719-DB5B-45A4-8DA2-5D5889E8EB73} = {69A48719-DB5B-45A4-8DA2-5D5889E8EB73}
+		{B3E3EAAF-BB15-456F-81D4-0218355DFC1A} = {B3E3EAAF-BB15-456F-81D4-0218355DFC1A}
 	EndProjectSection
 EndProject
 Global

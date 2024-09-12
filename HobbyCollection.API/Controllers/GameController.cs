@@ -1,5 +1,4 @@
 ﻿using Hobby.Model.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -9,13 +8,12 @@ namespace HobbyCollection.API.Controllers
 	[ApiController]
 	public class GameController : BaseController
 	{
-        public GameController()
-        {
-            
-        }
 
-        [HttpGet]
-        public GameDTO Get(int id)
+
+        public GameController() { }
+
+        [HttpGet("Get")]
+        public GameDTO Game(int id)
         {
             GameDTO gameDTO = new GameDTO();
             gameDTO.Id = 1;
@@ -24,13 +22,13 @@ namespace HobbyCollection.API.Controllers
 			return gameDTO;
         }
 
-        [HttpPost]
+        [HttpPost("Save")]
         public void Save(GameDTO game)
         {
             Debug.WriteLine(game.Name);
         }
 
-		[HttpGet]
+		[HttpGet("List")]
 		public IList<GameDTO> List()
         {
             IList<GameDTO> gameDTOList = new List<GameDTO>();
