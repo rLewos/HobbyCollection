@@ -1,4 +1,5 @@
 ﻿using Hobby.Model.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,6 +7,7 @@ namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+    [Authorize(Roles = "Manager")]
 	public class GameController : BaseController
 	{
 
