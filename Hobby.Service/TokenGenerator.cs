@@ -27,7 +27,7 @@ namespace Hobby.Service
 
 			// TODO:  password
 			if (userLogin == null || !(userLogin.Nickname == user.userName))
-				return string.Empty;
+				return null;
 
 			var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
 			string issuer = _configuration["JWT:Issuer"];
@@ -37,7 +37,7 @@ namespace Hobby.Service
 			var tokenOptions = new JwtSecurityToken(
 				issuer,
 				audience,
-				claims: new[] { new Claim(ClaimTypes.Name, "Galo Cego") },
+				claims: new[] { new Claim(ClaimTypes.Name, "Galo Cego"), new Claim(ClaimTypes.Role, "Manager")  },
 				expires: DateTime.Now.AddHours(1),
 				signingCredentials: signingCredentials
 				);

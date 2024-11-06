@@ -51,7 +51,6 @@ builder.Services.AddSwaggerGen(opt =>
 });
 
 
-
 builder.Services.AddAuthentication(opt =>
 {
 	opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,14 +65,14 @@ builder.Services.AddAuthentication(opt =>
 		ValidateLifetime = true,
 		ValidateIssuerSigningKey = true,
 
-		ValidIssuer = builder.Configuration["Jwt:Issue"],
-		ValidAudience = builder.Configuration["Jwt:Audience"],
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+		ValidIssuer = builder.Configuration["JWT:Issuer"],
+		ValidAudience = builder.Configuration["JWT:Audience"],
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
 	};
 });
 
 string? connectionString = builder.Configuration.GetConnectionString("Default");
-if (connectionString == null)
+if (string.IsNullOrEmpty(connectionString))
 	throw new NullReferenceException("ConnectionString is null");
 
 builder.Services.AddDbContext<HobbyContext>(opt => opt.UseNpgsql(connectionString));

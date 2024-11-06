@@ -20,10 +20,12 @@ namespace HobbyCollection.API.Controllers
 		}
 
 		[HttpPost("Login")]
-        public string Login(LoginDTO user)
+        public TokenDTO Login(LoginDTO user)
         {
-			string token = _tokenGenerator.GenerateToken(user);
-            return token;
+			TokenDTO dto = new TokenDTO();
+			dto.Token = _tokenGenerator.GenerateToken(user);
+			
+			return dto;
         }
 
     }
