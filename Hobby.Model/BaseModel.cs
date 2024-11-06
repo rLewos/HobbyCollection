@@ -12,7 +12,5 @@ namespace Games.Model
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-
-        public abstract void Validate();
     }
 }

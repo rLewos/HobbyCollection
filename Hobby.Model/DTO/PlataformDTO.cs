@@ -8,5 +8,7 @@ namespace Hobby.Model.DTO
 {
 	public class PlataformDTO
 	{
+		public string? Name { get; set; }
+		public string? Abbreviation { get; set; }
 	}
 }

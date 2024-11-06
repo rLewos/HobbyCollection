@@ -81,6 +81,7 @@ namespace Games.Infraestructure
 			etbUser.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired();
 			etbUser.Property(e => e.Name).HasColumnName("nm_User").IsRequired();
 			etbUser.Property(e => e.Nickname).HasColumnName("nm_Nickname").IsRequired();
+			etbUser.Property(e => e.Password).HasColumnName("ds_Password").IsRequired();
 
 			etbUser.HasMany(e => e.GameList).WithMany(e => e.UserList)
 				.UsingEntity<UserGame>(

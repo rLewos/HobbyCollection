@@ -10,10 +10,5 @@ namespace Games.Model
     {
         public string? Name { get; set; }
         public IList<Game>? GameList { get; set; }
-
-		public override void Validate()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

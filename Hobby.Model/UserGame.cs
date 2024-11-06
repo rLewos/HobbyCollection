@@ -11,10 +11,5 @@ namespace Games.Model
         public User? User { get; set; }
         public Game? Game { get; set; }
         public bool HasBeaten { get; set; }
-
-		public override void Validate()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
