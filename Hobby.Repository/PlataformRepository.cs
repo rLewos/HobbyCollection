@@ -53,7 +53,7 @@ namespace Hobby.Repository
 
 				_context.SaveChanges();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				throw;
 			}

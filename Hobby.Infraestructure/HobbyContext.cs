@@ -7,16 +7,16 @@ namespace Games.Infraestructure
 {
 	public class HobbyContext : DbContext
 	{
-        public DbSet<Game> Games { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Developer> Developers { get; set; }
-        public DbSet<Publisher> Publishers { get; set; }
-        public DbSet<Plataform> Plataforms { get; set; }
+		public DbSet<Game> Games { get; set; }
+		public DbSet<User> Users { get; set; }
+		public DbSet<Developer> Developers { get; set; }
+		public DbSet<Publisher> Publishers { get; set; }
+		public DbSet<Plataform> Plataforms { get; set; }
 
-        public HobbyContext(DbContextOptions<HobbyContext> options): base (options)
-        {
+		public HobbyContext(DbContextOptions<HobbyContext> options) : base(options)
+		{
 
-        }
+		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -24,9 +24,9 @@ namespace Games.Infraestructure
 			etbDeveloper.ToTable("Tb_Developer");
 			etbDeveloper.HasKey(e => e.Id).HasName("PK_Developer");
 			etbDeveloper.Property(e => e.Id).HasColumnName("id_Developer").ValueGeneratedOnAdd();
-            etbDeveloper.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
+			etbDeveloper.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
 			etbDeveloper.Property(e => e.CreatedDate).HasColumnName("dat_Created").IsRequired();
-            etbDeveloper.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired();
+			etbDeveloper.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired();
 			etbDeveloper.Property(e => e.Name).HasColumnName("nm_Developer").IsRequired();
 
 			EntityTypeBuilder<Publisher> etbPublisher = modelBuilder.Entity<Publisher>();
@@ -43,8 +43,14 @@ namespace Games.Infraestructure
 			etbPlataform.HasKey(e => e.Id).HasName("PK_Plataform");
 			etbPlataform.Property(e => e.Id).HasColumnName("id_Plataform").ValueGeneratedOnAdd();
 			etbPlataform.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
-			etbPlataform.Property(e => e.CreatedDate).HasColumnName("dat_Created").IsRequired();
-			etbPlataform.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired();
+			etbPlataform.Property(e => e.CreatedDate).HasColumnName("dat_Created").IsRequired().HasConversion(
+				v => v.ToUniversalTime(), // Convert to UTC when saving
+				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
+			);
+			etbPlataform.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired().HasConversion(
+				v => v.ToUniversalTime(), // Convert to UTC when saving
+				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
+			); ;
 			etbPlataform.Property(e => e.Name).HasColumnName("nm_Plataform").IsRequired();
 
 
@@ -88,7 +94,7 @@ namespace Games.Infraestructure
 					"Tb_UserGame",
 					 x => x.HasOne(e => e.Game).WithMany(e => e.UserGameList),
 					 x => x.HasOne(e => e.User).WithMany(e => e.UserGameList),
-					
+
 					 x => x.Property(e => e.HasBeaten).HasColumnName("has_Beaten")
 				);
 

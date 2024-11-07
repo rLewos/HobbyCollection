@@ -23,17 +23,26 @@ namespace HobbyCollection.API.Controllers
 		[HttpPost("Save")]
 		public IActionResult Save(PublisherDTO publisherDTO)
 		{
+			try
+			{
+				Publisher publisher = _mapper.Map<Publisher>(publisherDTO);
+				_publisherService.Save(publisher);
 
-
-			return Ok();
+				return Ok();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(e.Message);
+			}
 		}
 
 		[HttpGet("GetById")]
 		public IActionResult GetById(int id)
 		{
+			Publisher publisher = _publisherService.GetById(id);
+			PublisherDTO publisherDTO = _mapper.Map<PublisherDTO>(publisher);
 
-
-			return Ok();
+			return Ok(publisherDTO);
 		}
 
 		[HttpGet("List")]
