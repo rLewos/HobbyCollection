@@ -1,11 +1,7 @@
-using AutoMapper;
 using Games.Infraestructure;
-using Games.Model;
 using Hobby.Infraestructure;
-using Hobby.Model.DTO;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -54,7 +50,6 @@ builder.Services.AddSwaggerGen(opt =>
 
 });
 
-
 builder.Services.AddAuthentication(opt =>
 {
 	opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -74,7 +69,6 @@ builder.Services.AddAuthentication(opt =>
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
 	};
 });
-
 
 builder.Services.AddAutoMapper(typeof(Program));
 

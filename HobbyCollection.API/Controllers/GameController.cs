@@ -16,7 +16,8 @@ namespace HobbyCollection.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly IGameService _gameService;
 
-        public GameController(IMapper mapper, IGameService gameService) {
+        public GameController(IMapper mapper, IGameService gameService) 
+		{
 			_mapper = mapper;
 			_gameService = gameService;
 		}
@@ -42,7 +43,7 @@ namespace HobbyCollection.API.Controllers
 			}
 			catch (Exception e)
 			{
-				throw;
+				return BadRequest(e.Message);
 			}
         }
 

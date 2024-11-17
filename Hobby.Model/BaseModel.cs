@@ -12,5 +12,10 @@ namespace Games.Model
         public bool IsActive { get; set; } = true;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
+
+        //protected BaseModel(bool isActive, DateTime createdDate, DateTime updatedDate)
+        //{
+            
+        //}
     }
 }

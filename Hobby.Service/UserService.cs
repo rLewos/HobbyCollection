@@ -34,6 +34,8 @@ namespace Hobby.Service
 			try
 			{
 				obj.Validate();
+
+
 				_userRepository.Save(obj);
 			}
 			catch (Exception e)

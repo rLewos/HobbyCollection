@@ -2,7 +2,6 @@
 using Games.Model;
 using Hobby.Model.DTO;
 using Hobby.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.API.Controllers
