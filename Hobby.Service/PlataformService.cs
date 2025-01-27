@@ -21,7 +21,7 @@ namespace Hobby.Service
 
 		public Plataform? GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _plataformRepository.GetById(id);
 		}
 
 		public IList<Plataform>? ListAll()

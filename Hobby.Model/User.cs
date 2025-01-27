@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Games.Model
 {
     public class User : BaseModel
@@ -14,7 +9,9 @@ namespace Games.Model
         public IList<Game>? GameList { get; set; }
         public IList<UserGame>? UserGameList { get; set; }
 
-		public  void Validate()
+        public Roles Role { get; set; }
+
+		public void Validate()
 		{
 			if (string.IsNullOrEmpty(this.Name))
 				throw new Exception("Username is empty");

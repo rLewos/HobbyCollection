@@ -8,19 +8,11 @@ namespace HobbyCollection.API
 	{
         public MappingProfile()
         {
-			// Entity -> DTO
-			CreateMap<Game, GameDTO>();
-			CreateMap<Developer, DeveloperDTO>();
-			CreateMap<User, UserDTO>();
-			CreateMap<Plataform, PlataformDTO>();
-			CreateMap<Publisher, PublisherDTO>();
-
-			// DTO -> Entity
-			CreateMap<GameDTO, Game>();
-			CreateMap<DeveloperDTO, Developer>();
-			CreateMap<UserDTO, User>();
-			CreateMap<PlataformDTO, Plataform>();
-			CreateMap<PublisherDTO, Publisher>();
+			CreateMap<Game, GameDTO>().ReverseMap();
+			CreateMap<Developer, DeveloperDTO>().ReverseMap();
+			CreateMap<User, UserDTO>().ReverseMap();
+			CreateMap<Plataform, PlataformDTO>().ReverseMap();
+			CreateMap<Publisher, PublisherDTO>().ReverseMap();
 		}
     }
 }

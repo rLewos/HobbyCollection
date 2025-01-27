@@ -42,6 +42,11 @@ namespace Hobby.Repository
 			return _context.Plataforms.ToList();
 		}
 
+		public Plataform? GetById(int id)
+		{
+			return _context.Plataforms.SingleOrDefault(x => x.Id == id);
+		}
+
 		public void Save(Plataform entity)
 		{
 			try

@@ -3,6 +3,7 @@ using Games.Model;
 using Hobby.Model.DTO;
 using Hobby.Service;
 using Hobby.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize(Roles = "Manager")]
 	public class DeveloperController : BaseController
 	{
 		private readonly IDeveloperService _developerService;
@@ -22,7 +24,7 @@ namespace HobbyCollection.API.Controllers
 		}
 
 		[HttpPost("Save")]
-		public IActionResult Save(DeveloperDTO developerDTO)
+		public IActionResult Save([FromBody] DeveloperDTO developerDTO)
 		{
 			try
 			{
@@ -37,7 +39,7 @@ namespace HobbyCollection.API.Controllers
 			}
 		}
 
-		[HttpGet("GetById")]
+		[HttpGet("GetById/{id}")]
 		public IActionResult GetById(int id)
 		{
 			Developer developer = _developerService.GetById(id);

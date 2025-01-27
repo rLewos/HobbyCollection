@@ -12,5 +12,6 @@ namespace Hobby.Repository.Interfaces
 	{
 		Plataform? GetByName(string plataformName);
 		IList<Plataform> ListAll();
+		Plataform? GetById(int id);
 	}
 }

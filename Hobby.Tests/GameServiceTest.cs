@@ -1,14 +1,6 @@
 ﻿using Games.Model;
-using Games.Service;
 using Games.Service.Interfaces;
 using Games.Tests;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hobby.Tests.Service
@@ -26,13 +18,8 @@ namespace Hobby.Tests.Service
         public void Add()
         {
             // Arrange
-            Game game = new Game();
-            game.Name = "Game TDD";
-            game.ReleaseDate = DateTime.Now;
-
-            game.IsActive = true;
-            game.CreatedDate = DateTime.Now;
-            game.UpdatedDate = DateTime.Now;
+            Game game = this.GetGame();
+            game.Name = "Game ADD Test";
 
             // Act
             _gameService.Save(game);
@@ -46,7 +33,7 @@ namespace Hobby.Tests.Service
             
             Game? game = _gameService.GetByName("Game TDD");
 
-            game.Name = "Game test v2";
+            game.Name = "Game UPDATE Test";
             _gameService.Save(game);
             Game returnedGame = _gameService.GetById(game.Id);
 
@@ -57,13 +44,8 @@ namespace Hobby.Tests.Service
         public void Get()
         {
 			// Arrange
-			Game game = new Game();
-			game.Name = "Game TDD";
-			game.ReleaseDate = DateTime.Now;
-
-			game.IsActive = true;
-			game.CreatedDate = DateTime.Now;
-			game.UpdatedDate = DateTime.Now;
+            Game game = this.GetGame();
+            game.Name = "Game GET test";
             _gameService.Save(game);
 
 			// Act
@@ -107,6 +89,19 @@ namespace Hobby.Tests.Service
 
             // Assert
             Assert.Null(gameAssert);
+        }
+
+        public Game GetGame()
+        {
+            return new Game()
+            {
+                Name = "Game",
+                ReleaseDate = DateTime.Now,
+
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
+            };
         }
 
     }

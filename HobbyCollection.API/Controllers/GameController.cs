@@ -4,7 +4,6 @@ using Games.Service.Interfaces;
 using Hobby.Model.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace HobbyCollection.API.Controllers
 {
@@ -15,14 +14,14 @@ namespace HobbyCollection.API.Controllers
 	{
 		private readonly IMapper _mapper;
 		private readonly IGameService _gameService;
-
+		
         public GameController(IMapper mapper, IGameService gameService) 
 		{
 			_mapper = mapper;
 			_gameService = gameService;
 		}
 
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{id}")]
         public IActionResult  GetById(int id)
         {
 			Game game = _gameService.GetById(id);
@@ -32,7 +31,7 @@ namespace HobbyCollection.API.Controllers
         }
 
         [HttpPost("Save")]
-        public IActionResult Save(GameDTO gameDTO)
+        public IActionResult Save([FromBody] GameDTO gameDTO)
         {
 			try
 			{

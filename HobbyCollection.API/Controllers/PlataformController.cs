@@ -2,12 +2,14 @@
 using Games.Model;
 using Hobby.Model.DTO;
 using Hobby.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+    [Authorize(Roles = "Manager")]
 	public class PlataformController : BaseController
 	{
         private readonly IMapper _mapper;
@@ -20,7 +22,7 @@ namespace HobbyCollection.API.Controllers
         }
 
         [HttpPost("Save")]
-        public IActionResult Save(PlataformDTO plataformDTO)
+        public IActionResult Save([FromBody] PlataformDTO plataformDTO)
         {
             try
             {
@@ -40,8 +42,19 @@ namespace HobbyCollection.API.Controllers
         {
             IList<Plataform> plataformList = _plataformService.ListAll();
             IList<PlataformDTO> plataformDTOList = _mapper.Map<IList<PlataformDTO>>(plataformList);
+            
             return Ok(plataformDTOList);
         }
 
+        [HttpGet("GetById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            Plataform plataform = _plataformService.GetById(id);
+            PlataformDTO plataformDTO = _mapper.Map<PlataformDTO>(plataform);
+            
+            return Ok(plataformDTO);
+        }
+        
+        
     }
 }

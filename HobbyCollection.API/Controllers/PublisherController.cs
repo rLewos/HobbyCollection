@@ -2,6 +2,7 @@
 using Games.Model;
 using Hobby.Model.DTO;
 using Hobby.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize(Roles = "Manager")]
 	public class PublisherController : BaseController
 	{
 		private readonly IPublisherService _publisherService;
@@ -21,7 +23,7 @@ namespace HobbyCollection.API.Controllers
 		}
 
 		[HttpPost("Save")]
-		public IActionResult Save(PublisherDTO publisherDTO)
+		public IActionResult Save([FromBody] PublisherDTO publisherDTO)
 		{
 			try
 			{
@@ -36,7 +38,7 @@ namespace HobbyCollection.API.Controllers
 			}
 		}
 
-		[HttpGet("GetById")]
+		[HttpGet("GetById/{id}")]
 		public IActionResult GetById(int id)
 		{
 			Publisher publisher = _publisherService.GetById(id);
