@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Games.Model;
+using Hobby.Infraestructure.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +12,8 @@ namespace Games.Infraestructure
 		public DbSet<User> Users { get; set; }
 		public DbSet<Developer> Developers { get; set; }
 		public DbSet<Publisher> Publishers { get; set; }
-		public DbSet<Plataform> Plataforms { get; set; }
+		public DbSet<Platform> Plataforms { get; set; }
+		public DbSet<Roles> Roles { get; set; }
 
 		public HobbyContext(DbContextOptions<HobbyContext> options) : base(options)
 		{
@@ -20,37 +22,9 @@ namespace Games.Infraestructure
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			EntityTypeBuilder<Developer> etbDeveloper = modelBuilder.Entity<Developer>();
-			etbDeveloper.ToTable("Tb_Developer");
-			etbDeveloper.HasKey(e => e.Id).HasName("PK_Developer");
-			etbDeveloper.Property(e => e.Id).HasColumnName("id_Developer").ValueGeneratedOnAdd();
-			etbDeveloper.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
-			etbDeveloper.Property(e => e.CreatedDate).HasColumnName("dat_Created").IsRequired().HasConversion(
-				v => v.ToUniversalTime(), // Convert to UTC when saving
-				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
-			);
-			etbDeveloper.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired().HasConversion(
-				v => v.ToUniversalTime(), // Convert to UTC when saving
-				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
-			);
-			etbDeveloper.Property(e => e.Name).HasColumnName("nm_Developer").IsRequired();
+			this.SetMappings(modelBuilder);
 
-			EntityTypeBuilder<Publisher> etbPublisher = modelBuilder.Entity<Publisher>();
-			etbPublisher.ToTable("Tb_Publisher");
-			etbPublisher.HasKey(e => e.Id).HasName("PK_Publisher");
-			etbPublisher.Property(e => e.Id).HasColumnName("id_Publisher").ValueGeneratedOnAdd();
-			etbPublisher.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
-			etbPublisher.Property(e => e.CreatedDate).HasColumnName("dat_Created").IsRequired().HasConversion(
-				v => v.ToUniversalTime(), // Convert to UTC when saving
-				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
-			);
-			etbPublisher.Property(e => e.UpdatedDate).HasColumnName("dat_Updated").IsRequired().HasConversion(
-				v => v.ToUniversalTime(), // Convert to UTC when saving
-				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
-			);
-			etbPublisher.Property(e => e.Name).HasColumnName("nm_Publisher").IsRequired();
-
-			EntityTypeBuilder<Plataform> etbPlataform = modelBuilder.Entity<Plataform>();
+			EntityTypeBuilder<Platform> etbPlataform = modelBuilder.Entity<Platform>();
 			etbPlataform.ToTable("Tb_Plataform");
 			etbPlataform.HasKey(e => e.Id).HasName("PK_Plataform");
 			etbPlataform.Property(e => e.Id).HasColumnName("id_Plataform").ValueGeneratedOnAdd();
@@ -101,7 +75,7 @@ namespace Games.Infraestructure
 			etbUser.Property(e => e.Name).HasColumnName("nm_User").IsRequired();
 			etbUser.Property(e => e.Nickname).HasColumnName("nm_Nickname").IsRequired();
 			etbUser.Property(e => e.Password).HasColumnName("ds_Password").IsRequired();
-
+			
 			etbUser.HasMany(e => e.GameList).WithMany(e => e.UserList)
 				.UsingEntity<UserGame>(
 					"Tb_UserGame",
@@ -110,8 +84,32 @@ namespace Games.Infraestructure
 
 					 x => x.Property(e => e.HasBeaten).HasColumnName("has_Beaten")
 				);
+			
+			
+			
+
+			EntityTypeBuilder<Roles> etbRole = modelBuilder.Entity<Roles>();
+			etbRole.ToTable("Tb_Role");
+			etbRole.HasKey(e => e.Id).HasName("PK_Roles");
+			etbRole.Property(e => e.Id).HasColumnName("id_Roles").ValueGeneratedOnAdd();
+			etbRole.Property(e => e.IsActive).HasColumnName("is_Active").IsRequired();
+			etbRole.Property(e => e.CreatedDate).HasColumnName("dt_Created").IsRequired().HasConversion(
+				v => v.ToUniversalTime(), 
+				v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
+			);
+			etbRole.Property(e => e.UpdatedDate).HasColumnName("dt_Updated").IsRequired().HasConversion(
+				v => v.ToUniversalTime(), // Convert to UTC when saving
+				v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Specify as UTC when reading
+			);
+			etbRole.Property(e => e.Name).HasColumnName("nm_User").IsRequired();
 
 			base.OnModelCreating(modelBuilder);
+		}
+
+		private void SetMappings(ModelBuilder modelBuilder)
+		{
+			modelBuilder.ApplyConfiguration(new DeveloperMapping());
+			modelBuilder.ApplyConfiguration(new PublisherMapping());
 		}
 	}
 }

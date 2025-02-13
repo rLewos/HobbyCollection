@@ -10,23 +10,15 @@ namespace HobbyCollection.API.Controllers
 	[Route("api/[controller]")]
 	[ApiController]
 	[AllowAnonymous]
-	public class AuthController : BaseController
+	public class AuthController(ITokenGenerator tokenGenerator) : BaseController
 	{
-        private readonly ITokenGenerator _tokenGenerator;
-
-		public AuthController(ITokenGenerator tokenGenerator)
-		{
-			_tokenGenerator = tokenGenerator;
-		}
-
 		[HttpPost("Login")]
-        public TokenDTO Login(LoginDTO user)
+        public IActionResult Login([FromBody] LoginDTO user)
         {
 			TokenDTO dto = new TokenDTO();
-			dto.Token = _tokenGenerator.GenerateToken(user);
+			dto.Token = tokenGenerator.GenerateToken(user);
 			
-			return dto;
+			return Ok(dto);
         }
-
     }
 }

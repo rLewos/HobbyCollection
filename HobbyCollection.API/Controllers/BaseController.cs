@@ -9,6 +9,6 @@ namespace HobbyCollection.API.Controllers
 	[Authorize(Roles = "Manager")]
 	public class BaseController : ControllerBase
 	{
-
+		
 	}
 }

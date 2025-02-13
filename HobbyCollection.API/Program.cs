@@ -19,8 +19,8 @@ builder.Services.AddSwaggerGen(opt =>
 	opt.SwaggerDoc("v1", new OpenApiInfo()
 	{
 		Version = "v1",
-		Title = "Admin.API",
-		Description = "API de admin",
+		Title = "HobbyCollection API",
+		Description = "HobbyCollection main API",
 	});
 
 	opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()

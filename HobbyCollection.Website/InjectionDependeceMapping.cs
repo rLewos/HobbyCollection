@@ -33,8 +33,8 @@ namespace HobbyCollection.Website
 			_services.AddTransient<IPublisherService, PublisherService>();
 			_services.AddTransient<IPublisherRepository, PublisherRepository>();
 
-			_services.AddTransient<IPlataformService, PlataformService>();
-			_services.AddTransient<IPlataformRepository, PlataformRepository>();
+			_services.AddTransient<IPlatformService, PlatformService>();
+			_services.AddTransient<PlatformRepository, PlatformRepository>();
 		}
     }
 }

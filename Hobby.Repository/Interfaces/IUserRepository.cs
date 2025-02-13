@@ -10,7 +10,9 @@ namespace Hobby.Repository.Interfaces
 {
 	public interface IUserRepository : IBaseRepository<User>
 	{
-		User? GetByName(string userName);
+		User? GetByName(string name);
 		IList<User> ListAll();
+		bool Login(string nickname, string password);
+		User? GetByNickname(string nickname);
 	}
 }

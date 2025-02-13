@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
-	public class PlataformController : BaseController
+	public class PlatformController : BaseController
 	{
-		private readonly IPlataformService _plataformService;
-        public PlataformController(IPlataformService plataformService)
+		private readonly IPlatformService _iPlatformService;
+        public PlatformController(IPlatformService iPlatformService)
         {
-            this._plataformService = plataformService;
+            this._iPlatformService = iPlatformService;
         }
 
         #region Views
@@ -21,8 +21,8 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult List()
 		{
-			PlataformViewModel vm = new PlataformViewModel();
-			vm.PlataformList = _plataformService.ListAll();
+			PlatformViewModel vm = new PlatformViewModel();
+			vm.PlataformList = _iPlatformService.ListAll();
 
 			return View(vm);
 		}
@@ -36,11 +36,11 @@ namespace HobbyCollection.Website.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Save(PlataformViewModel vm)
+		public IActionResult Save(PlatformViewModel vm)
 		{
 			try
 			{
-				_plataformService.Save(vm.Plataform);
+				_iPlatformService.Save(vm.Plataform);
 			}
 			catch (Exception e)
 			{

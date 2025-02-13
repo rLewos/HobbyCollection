@@ -10,5 +10,5 @@ namespace Games.Model
     {
         public string? Name { get; set; }
         public IList<Game>? GameList { get; set; }
-	}
+    }
 }

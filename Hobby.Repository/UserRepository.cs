@@ -32,14 +32,30 @@ namespace Hobby.Repository
 			return _context.Users.SingleOrDefault(u => u.Id == id);
 		}
 
-		public User GetByName(string userName)
+		public User GetByName(string name)
 		{
-			return _context.Users.SingleOrDefault(u => u.Name == userName);
+			return _context.Users.SingleOrDefault(u => u.Name == name);
 		}
 
 		public IList<User> ListAll()
 		{
 			return _context.Users.ToList();
+		}
+
+		public bool Login(string nickname, string password)
+		{
+			User? userLogin = this.GetByNickname(nickname);
+
+			bool isNicknameRight = userLogin != null && (string.Equals(userLogin.Nickname, nickname));
+			bool isPasswordRight = userLogin != null && (string.Equals(userLogin.Password, password));
+			
+			// TODO:  password
+			return isNicknameRight && isPasswordRight;
+		}
+
+		public User? GetByNickname(string nickname)
+		{
+			return _context.Users.SingleOrDefault(u => u.Nickname == nickname);
 		}
 
 		public void Save(User entity)

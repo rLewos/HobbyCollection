@@ -23,34 +23,29 @@ namespace Hobby.Service
 
 		public string GenerateToken(LoginDTO user)
 		{
-			User? userLogin = _userRepository.GetByName(user.userName);
+			if (_userRepository.Login(user.userName, user.password))
+			{
+				SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
+				string issuer = _configuration["JWT:Issuer"];
+				string audience = _configuration["JWT:Audience"];
 
-			bool isUsernameSame = userLogin != null && (string.Equals(userLogin.Nickname, user.userName));
-			bool isPasswordRight = userLogin != null && (string.Equals(userLogin.Password, user.password));
-			
-			// TODO:  password
-			if (userLogin == null || !isUsernameSame || !isPasswordRight)
-				return null;
-
-			SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
-			string issuer = _configuration["JWT:Issuer"];
-			string audience = _configuration["JWT:Audience"];
-
-			SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-			JwtSecurityToken tokenOptions = new JwtSecurityToken(
-				issuer,
-				audience,
-				claims: new[] { 
-					new Claim(ClaimTypes.Name, "Galo Cego"),
-					new Claim(ClaimTypes.Role, "Manager")
-				},
-				expires: DateTime.Now.AddHours(1),
-				signingCredentials: signingCredentials
+				SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+				JwtSecurityToken tokenOptions = new JwtSecurityToken(
+					issuer,
+					audience,
+					claims: new[] { 
+						new Claim(ClaimTypes.Name, "Galo Cego"),
+						new Claim(ClaimTypes.Role, "Manager")
+					},
+					expires: DateTime.Now.AddHours(1),
+					signingCredentials: signingCredentials
 				);
 
-			string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-			return token;
+				string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+				return token;	
+			}
+			
+			return null;
 		}
 	}
 }

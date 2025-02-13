@@ -10,24 +10,24 @@ namespace HobbyCollection.API.Controllers
 	[Route("api/[controller]")]
 	[ApiController]
     [Authorize(Roles = "Manager")]
-	public class PlataformController : BaseController
+	public class PlatformController : BaseController
 	{
         private readonly IMapper _mapper;
-        private readonly IPlataformService _plataformService;
+        private readonly IPlatformService _iPlatformService;
 
-        public PlataformController(IMapper mapper, IPlataformService plataformService)
+        public PlatformController(IMapper mapper, IPlatformService iPlatformService)
         {
             _mapper = mapper;
-            _plataformService = plataformService;
+            _iPlatformService = iPlatformService;
         }
 
         [HttpPost("Save")]
-        public IActionResult Save([FromBody] PlataformDTO plataformDTO)
+        public IActionResult Save([FromBody] PlatformDTO platformDto)
         {
             try
             {
-				Plataform plataform = _mapper.Map<Plataform>(plataformDTO);
-				_plataformService.Save(plataform);
+				Platform platform = _mapper.Map<Platform>(platformDto);
+				_iPlatformService.Save(platform);
 
 				return Ok();
 			}
@@ -40,8 +40,8 @@ namespace HobbyCollection.API.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            IList<Plataform> plataformList = _plataformService.ListAll();
-            IList<PlataformDTO> plataformDTOList = _mapper.Map<IList<PlataformDTO>>(plataformList);
+            IList<Platform> plataformList = _iPlatformService.ListAll();
+            IList<PlatformDTO> plataformDTOList = _mapper.Map<IList<PlatformDTO>>(plataformList);
             
             return Ok(plataformDTOList);
         }
@@ -49,10 +49,10 @@ namespace HobbyCollection.API.Controllers
         [HttpGet("GetById/{id}")]
         public IActionResult GetById(int id)
         {
-            Plataform plataform = _plataformService.GetById(id);
-            PlataformDTO plataformDTO = _mapper.Map<PlataformDTO>(plataform);
+            Platform platform = _iPlatformService.GetById(id);
+            PlatformDTO platformDto = _mapper.Map<PlatformDTO>(platform);
             
-            return Ok(plataformDTO);
+            return Ok(platformDto);
         }
         
         

@@ -9,9 +9,10 @@ namespace Games.Model
         public IList<Game>? GameList { get; set; }
         public IList<UserGame>? UserGameList { get; set; }
 
-        public Roles Role { get; set; }
+        
+        
 
-		public void Validate()
+		public override void Validate()
 		{
 			if (string.IsNullOrEmpty(this.Name))
 				throw new Exception("Username is empty");

@@ -5,16 +5,16 @@ using Hobby.Repository.Interfaces;
 
 namespace Hobby.Repository
 {
-	public class PlataformRepository : IBaseRepository<Plataform>, IPlataformRepository
+	public class PlatformRepository : IBaseRepository<Platform>, IPlatformRepository
 	{
 		private HobbyContext _context;
 
-		public PlataformRepository(HobbyContext hobbyContext)
+		public PlatformRepository(HobbyContext hobbyContext)
 		{
 			_context = hobbyContext;
 		}
 
-		public void Delete(Plataform entity)
+		public void Delete(Platform entity)
 		{
 			try
 			{
@@ -27,27 +27,27 @@ namespace Hobby.Repository
 			}
 		}
 
-		public Plataform Get(int id)
+		public Platform Get(int id)
 		{
 			return _context.Plataforms.SingleOrDefault(p => p.Id == id);
 		}
 
-		public Plataform GetByName(string platformName)
+		public Platform GetByName(string platformName)
 		{
 			return _context.Plataforms.SingleOrDefault(p => p.Name == platformName);
 		}
 
-		public IList<Plataform> ListAll()
+		public IList<Platform> ListAll()
 		{
 			return _context.Plataforms.ToList();
 		}
 
-		public Plataform? GetById(int id)
+		public Platform? GetById(int id)
 		{
 			return _context.Plataforms.SingleOrDefault(x => x.Id == id);
 		}
 
-		public void Save(Plataform entity)
+		public void Save(Platform entity)
 		{
 			try
 			{

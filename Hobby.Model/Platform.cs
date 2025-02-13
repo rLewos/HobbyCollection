@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Games.Model
 {
-	public class Plataform : BaseModel
+	public class Platform : BaseModel
     {
         public string? Name { get; set; }
         public string? Abbreviation { get; set; }

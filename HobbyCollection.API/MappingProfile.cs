@@ -11,7 +11,7 @@ namespace HobbyCollection.API
 			CreateMap<Game, GameDTO>().ReverseMap();
 			CreateMap<Developer, DeveloperDTO>().ReverseMap();
 			CreateMap<User, UserDTO>().ReverseMap();
-			CreateMap<Plataform, PlataformDTO>().ReverseMap();
+			CreateMap<Platform, PlatformDTO>().ReverseMap();
 			CreateMap<Publisher, PublisherDTO>().ReverseMap();
 		}
     }

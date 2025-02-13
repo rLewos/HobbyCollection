@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Hobby.Service.Interfaces
 {
-	public interface IPlataformService : IBaseService<Plataform>
+	public interface IPlatformService : IBaseService<Platform>
 	{
-		IList<Plataform>? ListAll();
+		IList<Platform>? ListAll();
 	}
 }

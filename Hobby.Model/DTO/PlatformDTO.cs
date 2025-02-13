@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hobby.Model.DTO
 {
-	public class PlataformDTO
+	public class PlatformDTO
 	{
 		public string? Name { get; set; }
 		public string? Abbreviation { get; set; }

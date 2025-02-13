@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Hobby.Repository.Interfaces
 {
-	public interface IPlataformRepository : IBaseRepository<Plataform>
+	public interface IPlatformRepository : IBaseRepository<Platform>
 	{
-		Plataform? GetByName(string plataformName);
-		IList<Plataform> ListAll();
-		Plataform? GetById(int id);
+		Platform? GetByName(string plataformName);
+		IList<Platform> ListAll();
+		Platform? GetById(int id);
 	}
 }
