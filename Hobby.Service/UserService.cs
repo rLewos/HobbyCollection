@@ -5,7 +5,7 @@ using Hobby.Service.Interfaces;
 
 namespace Hobby.Service
 {
-	public class UserService : IBaseService<User>, IUserService
+	public class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
 
@@ -14,14 +14,15 @@ namespace Hobby.Service
 			_userRepository = userRepository;
 		}
 
-		public void Delete(int id)
-		{
-			throw new NotImplementedException();
-		}
-
 		public User? GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _userRepository.Get(id);
+		}
+
+		public void Remove(int id)
+		{
+			User? user = GetById(id);
+			_userRepository.Delete(user);
 		}
 
 		public IList<User> ListAll()
@@ -43,11 +44,6 @@ namespace Hobby.Service
 
 				throw;
 			}
-		}
-
-		public void Validate(User t)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

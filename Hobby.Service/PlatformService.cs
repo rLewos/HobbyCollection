@@ -5,7 +5,7 @@ using Hobby.Service.Interfaces;
 
 namespace Hobby.Service
 {
-	public class PlatformService : IBaseService<Platform>, IPlatformService
+	public class PlatformService : IPlatformService
 	{
 		private readonly IPlatformRepository _iPlatformRepository;
 
@@ -14,14 +14,15 @@ namespace Hobby.Service
 			this._iPlatformRepository = iPlatformRepository;
 		}
 
-		public void Delete(int id)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Platform? GetById(int id)
 		{
 			return _iPlatformRepository.GetById(id);
+		}
+
+		public void Remove(int id)
+		{
+			Platform? platform = GetById(id);
+			_iPlatformRepository.Delete(platform);
 		}
 
 		public IList<Platform>? ListAll()
@@ -40,11 +41,6 @@ namespace Hobby.Service
 
 				throw;
 			}
-		}
-
-		public void Validate(Platform t)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

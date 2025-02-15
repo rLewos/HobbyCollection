@@ -5,7 +5,7 @@ using Hobby.Service.Interfaces;
 
 namespace Hobby.Service
 {
-	public class PublisherService : IBaseService<Publisher>, IPublisherService
+	public class PublisherService : IPublisherService
 	{
 		private readonly IPublisherRepository _publisherRepository;
 
@@ -14,14 +14,15 @@ namespace Hobby.Service
             this._publisherRepository = publisherRepository;
         }
 
-		public void Delete(int id)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Publisher? GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _publisherRepository.Get(id);
+		}
+
+		public void Remove(int id)
+		{
+			Publisher? publisher = GetById(id);
+			_publisherRepository.Delete(publisher);
 		}
 
 		public IList<Publisher>? ListAll()
@@ -32,11 +33,6 @@ namespace Hobby.Service
 		public void Save(Publisher obj)
 		{
 			_publisherRepository.Save(obj);	
-		}
-
-		public void Validate(Publisher t)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

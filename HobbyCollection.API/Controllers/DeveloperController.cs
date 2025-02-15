@@ -56,5 +56,12 @@ namespace HobbyCollection.API.Controllers
 
 			return Ok(dto);
 		}
+
+		[HttpDelete("Remove/{id}")]
+		public IActionResult Remove(int id)
+		{
+			_developerService.Remove(id);
+			return Ok();
+		}
 	}
 }

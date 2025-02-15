@@ -12,7 +12,7 @@ namespace Hobby.Repository.Interfaces
 	{
 		User? GetByName(string name);
 		IList<User> ListAll();
-		bool Login(string nickname, string password);
+		User? Login(string nickname, string password);
 		User? GetByNickname(string nickname);
 	}
 }

@@ -23,7 +23,8 @@ namespace Hobby.Service
 
 		public string GenerateToken(LoginDTO user)
 		{
-			if (_userRepository.Login(user.userName, user.password))
+			User? usuarioLogin = _userRepository.Login(user.userName, user.password);
+			if (usuarioLogin != null)
 			{
 				SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
 				string issuer = _configuration["JWT:Issuer"];
@@ -34,8 +35,8 @@ namespace Hobby.Service
 					issuer,
 					audience,
 					claims: new[] { 
-						new Claim(ClaimTypes.Name, "Galo Cego"),
-						new Claim(ClaimTypes.Role, "Manager")
+						new Claim(ClaimTypes.Name, usuarioLogin.Name),
+						new Claim(ClaimTypes.Role, usuarioLogin.Role.Name)
 					},
 					expires: DateTime.Now.AddHours(1),
 					signingCredentials: signingCredentials

@@ -1,4 +1,7 @@
-﻿namespace Games.Model
+﻿using FluentValidation.Results;
+using Games.Model.Validations;
+
+namespace Games.Model
 {
     public class Game : BaseModel
     {
@@ -16,11 +19,9 @@
         /// </summary>
         public IList<UserGame>? UserGameList { get; set; }
 
-		public void Validate()
+		public override ValidationResult Validate()
 		{
-            if (string.IsNullOrEmpty(this.Name))
-                throw new Exception("Game's name is empty.");
-
+            return new GameValidator().Validate(this);
 		}
 	}
 }

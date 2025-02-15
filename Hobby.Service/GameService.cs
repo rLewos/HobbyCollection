@@ -1,10 +1,11 @@
-﻿using Games.Model;
+﻿using FluentValidation.Results;
+using Games.Model;
 using Games.Repository.Interfaces;
 using Games.Service.Interfaces;
 
 namespace Games.Service
 {
-	public class GameService : IBaseService<Game>, IGameService
+	public class GameService : IGameService
     {
         private IGameRepository _gameRepository;
 
@@ -13,31 +14,16 @@ namespace Games.Service
             _gameRepository = gameRepository;
         }
 
-		public void Delete(int id)
-		{
-			try
-			{
-				Game? game = this.GetById(id);
-				_gameRepository.Delete(game);
-			}
-			catch (Exception e)
-			{
-				throw;
-			}
-		}
-
 		public Game? GetById(int id)
 		{
-			try
-			{
-				Game? returnGame = _gameRepository.Get(id);
-				return returnGame;
-			}
-			catch (Exception e)
-			{
+			Game? returnGame = _gameRepository.Get(id);
+			return returnGame;
+		}
 
-				throw;
-			}
+		public void Remove(int id)
+		{
+			Game? game = this.GetById(id);
+			_gameRepository.Delete(game);
 		}
 
 		public Game? GetByName(string? gameName)
@@ -59,7 +45,7 @@ namespace Games.Service
         {
             try
             {
-                obj.Validate();
+                ValidationResult validationResult = obj.Validate();
                 
                 if (obj.Id <= 0)
 					obj.CreatedDate = DateTime.Now;
@@ -67,7 +53,8 @@ namespace Games.Service
                 obj.UpdatedDate = DateTime.Now;
                 obj.IsActive = true;
 
-                _gameRepository.Save(obj);
+                if(validationResult.IsValid)
+					_gameRepository.Save(obj);
 			}
             catch (Exception e)
             {
@@ -75,16 +62,5 @@ namespace Games.Service
                 throw e;
             }
         }
-
-        public void Validate(Game game) {
-            
-            if (game == null)
-                throw new ArgumentNullException(nameof(game));
-
-            if (string.IsNullOrEmpty(game.Name))
-                throw new Exception("Game's name is empty");
-
-        }
-
     }
 }

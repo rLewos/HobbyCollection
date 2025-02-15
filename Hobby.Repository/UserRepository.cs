@@ -2,6 +2,7 @@
 using Games.Model;
 using Games.Repository.Interfaces;
 using Hobby.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobby.Repository
 {
@@ -42,15 +43,17 @@ namespace Hobby.Repository
 			return _context.Users.ToList();
 		}
 
-		public bool Login(string nickname, string password)
+		public User? Login(string nickname, string password)
 		{
-			User? userLogin = this.GetByNickname(nickname);
+			User? userLogin = _context.Users.Include("Role").SingleOrDefault(u => u.Nickname == nickname);
 
 			bool isNicknameRight = userLogin != null && (string.Equals(userLogin.Nickname, nickname));
 			bool isPasswordRight = userLogin != null && (string.Equals(userLogin.Password, password));
+
+			if (isNicknameRight && isPasswordRight)
+				return userLogin;
 			
-			// TODO:  password
-			return isNicknameRight && isPasswordRight;
+			return null;
 		}
 
 		public User? GetByNickname(string nickname)

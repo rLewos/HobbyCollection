@@ -1,4 +1,7 @@
 ﻿
+using FluentValidation.Results;
+using Games.Model.Validations;
+
 namespace Games.Model
 {
     public class User : BaseModel
@@ -13,15 +16,9 @@ namespace Games.Model
         public Roles? Role { get; set; }
         
 
-		public override void Validate()
+		public override ValidationResult Validate()
 		{
-			if (string.IsNullOrEmpty(this.Name))
-				throw new Exception("Username is empty");
-
-			if (string.IsNullOrEmpty(this.Nickname))
-				throw new Exception("Nickname is empty");
-
-
+			return new UserValidator().Validate(this);
 		}
 	}
 }
