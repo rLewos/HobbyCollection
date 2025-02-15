@@ -35,6 +35,7 @@ namespace Games.Infraestructure
 			modelBuilder.ApplyConfiguration(new PublisherMapping());
 			modelBuilder.ApplyConfiguration(new UserMapping());
 			modelBuilder.ApplyConfiguration(new RoleMappings());
+			modelBuilder.ApplyConfiguration(new GameMapping());
 		}
 	}
 }

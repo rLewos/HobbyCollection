@@ -47,34 +47,12 @@ namespace HobbyCollection.API.Controllers
         }
 
 		[HttpGet("List")]
-		public IList<GameDTO> List()
+		public IActionResult List()
         {
   			IList<Game> gameList = _gameService.ListAll();
 			IList<GameDTO> gameDTOList = _mapper.Map<IList<GameDTO>>(gameList);
 
-			return gameDTOList;
-        }
-
-		[HttpGet("ListAll")]
-        public async Task<IList<GameDTO>> ListAllAsync()
-        {
-			IList<GameDTO> gameDTOList = new List<GameDTO>();
-
-            await Task.Run(() => {
-				GameDTO gameDTO = new GameDTO();
-				gameDTO.Id = 1;
-				gameDTO.Name = "NieR: Automata";
-
-				gameDTOList.Add(gameDTO);
-
-				GameDTO gameDTO2 = new GameDTO();
-				gameDTO.Id = 2;
-				gameDTO.Name = "Hatsune Miku: Project DIVA Future Tone DX";
-
-				gameDTOList.Add(gameDTO2);
-			});
-
-            return gameDTOList;
+			return Ok(gameDTOList);
         }
     }
 }

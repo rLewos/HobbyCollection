@@ -29,5 +29,8 @@ public class UserMapping : IEntityTypeConfiguration<User>
 
                 x => x.Property(e => e.HasBeaten).HasColumnName("has_Beaten")
             );
+
+        builder.Property(x => x.RoleId).HasColumnName("id_roles").HasDefaultValue(null);
+        builder.HasOne<Roles>(x => x.Role).WithMany().HasForeignKey(x => x.RoleId).HasPrincipalKey(x => x.Id).IsRequired(false);
     }
 }

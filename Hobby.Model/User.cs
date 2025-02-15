@@ -9,7 +9,8 @@ namespace Games.Model
         public IList<Game>? GameList { get; set; }
         public IList<UserGame>? UserGameList { get; set; }
 
-        
+        public int? RoleId { get; set; }
+        public Roles? Role { get; set; }
         
 
 		public override void Validate()

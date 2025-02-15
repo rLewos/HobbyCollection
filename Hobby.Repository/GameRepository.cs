@@ -4,13 +4,13 @@ using Games.Repository.Interfaces;
 
 namespace Games.Repository
 {
-	public class GameRepository : IBaseRepository<Game>, IGameRepository
+	public class GameRepository : IGameRepository
 	{
 		private HobbyContext _context;
 
 		public GameRepository(HobbyContext hobbyContext)
 		{
-			_context = hobbyContext;	
+			_context = hobbyContext;
 		}
 
 		public void Delete(Game? entity)
@@ -39,10 +39,7 @@ namespace Games.Repository
 
 		public IList<Game> ListAll()
 		{
-			IList<Game> list = new List<Game>();
-			list = _context.Games.ToList();
-
-			return list;
+			return _context.Games.ToList();
 		}
 
 		public void Save(Game entity)
