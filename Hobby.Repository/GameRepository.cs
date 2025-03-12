@@ -1,6 +1,7 @@
 ﻿using Games.Infraestructure;
 using Games.Model;
 using Games.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Games.Repository
 {
@@ -40,6 +41,12 @@ namespace Games.Repository
 		public IList<Game> ListAll()
 		{
 			return _context.Games.ToList();
+		}
+
+		public IList<Game> ListByUserId(string userId)
+		{
+			IList<Game> games =_context.UserGame.Where(ug => string.Equals(ug.User.Id.ToString(), userId)).Select(x => x.Game).ToList();
+			return games;
 		}
 
 		public void Save(Game entity)

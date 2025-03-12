@@ -41,6 +41,11 @@ namespace Games.Service
 			return _gameRepository.ListAll();
 		}
 
+		public IList<Game> ListByUserId(string userId)
+		{
+			return _gameRepository.ListByUserId(userId);
+		}
+
 		public void Save(Game obj)
         {
             try

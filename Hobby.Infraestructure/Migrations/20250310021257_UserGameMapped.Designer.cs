@@ -3,6 +3,7 @@ using System;
 using Games.Infraestructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hobby.Infraestructure.Migrations
 {
     [DbContext(typeof(HobbyContext))]
-    partial class HobbyContextModelSnapshot : ModelSnapshot
+    [Migration("20250310021257_UserGameMapped")]
+    partial class UserGameMapped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace Hobby.Infraestructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("GameUser", b =>
+                {
+                    b.Property<int>("GameListId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserListId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("GameListId", "UserListId");
+
+                    b.HasIndex("UserListId");
+
+                    b.ToTable("GameUser");
+                });
 
             modelBuilder.Entity("Games.Model.Developer", b =>
                 {
@@ -248,8 +266,7 @@ namespace Hobby.Infraestructure.Migrations
                         .HasColumnName("cd_game_id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dat_created");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("HasBeaten")
                         .ValueGeneratedOnAdd()
@@ -261,12 +278,10 @@ namespace Hobby.Infraestructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dat_updated");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("UserId", "GameId");
 
@@ -318,6 +333,21 @@ namespace Hobby.Infraestructure.Migrations
                     b.HasIndex("PublisherListId");
 
                     b.ToTable("Tb_GamePublisher");
+                });
+
+            modelBuilder.Entity("GameUser", b =>
+                {
+                    b.HasOne("Games.Model.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GameListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Games.Model.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Games.Model.User", b =>

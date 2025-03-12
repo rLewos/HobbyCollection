@@ -20,16 +20,7 @@ public class UserMapping : IEntityTypeConfiguration<User>
         builder.Property(e => e.Name).HasColumnName("nm_User").IsRequired();
         builder.Property(e => e.Nickname).HasColumnName("nm_Nickname").IsRequired();
         builder.Property(e => e.Password).HasColumnName("ds_Password").IsRequired();
-			
-        builder.HasMany(e => e.GameList).WithMany(e => e.UserList)
-            .UsingEntity<UserGame>(
-                "Tb_UserGame",
-                x => x.HasOne(e => e.Game).WithMany(e => e.UserGameList),
-                x => x.HasOne(e => e.User).WithMany(e => e.UserGameList),
-
-                x => x.Property(e => e.HasBeaten).HasColumnName("has_Beaten")
-            );
-
+        
         builder.Property(x => x.RoleId).HasColumnName("id_roles").HasDefaultValue(null);
         builder.HasOne<Roles>(x => x.Role).WithMany().HasForeignKey(x => x.RoleId).HasPrincipalKey(x => x.Id).IsRequired(false);
     }

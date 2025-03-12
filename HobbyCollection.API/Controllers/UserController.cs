@@ -56,5 +56,7 @@ namespace HobbyCollection.API.Controllers
 
 			return Ok(dto);
 		}
+
+		
 	}
 }

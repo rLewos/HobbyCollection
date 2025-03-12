@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using Games.Model;
 using Games.Service.Interfaces;
 using Hobby.Model.DTO;
@@ -54,5 +55,18 @@ namespace HobbyCollection.API.Controllers
 
 			return Ok(gameDTOList);
         }
+		
+		[HttpGet("ListByUser")]
+		public IActionResult ListByUser()
+		{
+			string? userId = User?.FindFirstValue("UserId");
+			if (userId == null)
+				return BadRequest();
+			
+			var gameList = _gameService.ListByUserId(userId);
+			var gameDtoList = _mapper.Map<IList<GameDTO>>(gameList);
+			
+			return Ok(gameDtoList);
+		}
     }
 }

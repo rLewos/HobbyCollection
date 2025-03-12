@@ -3,6 +3,7 @@ using System;
 using Games.Infraestructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hobby.Infraestructure.Migrations
 {
     [DbContext(typeof(HobbyContext))]
-    partial class HobbyContextModelSnapshot : ModelSnapshot
+    [Migration("20250310023214_RemovedGameFromUser")]
+    partial class RemovedGameFromUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,6 +205,9 @@ namespace Hobby.Infraestructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("dat_Created");
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean")
                         .HasColumnName("is_Active");
@@ -231,6 +237,8 @@ namespace Hobby.Infraestructure.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_User");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("RoleId");
 
@@ -322,6 +330,10 @@ namespace Hobby.Infraestructure.Migrations
 
             modelBuilder.Entity("Games.Model.User", b =>
                 {
+                    b.HasOne("Games.Model.Game", null)
+                        .WithMany("UserList")
+                        .HasForeignKey("GameId");
+
                     b.HasOne("Games.Model.Roles", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
@@ -396,6 +408,8 @@ namespace Hobby.Infraestructure.Migrations
             modelBuilder.Entity("Games.Model.Game", b =>
                 {
                     b.Navigation("UserGameList");
+
+                    b.Navigation("UserList");
                 });
 
             modelBuilder.Entity("Games.Model.User", b =>

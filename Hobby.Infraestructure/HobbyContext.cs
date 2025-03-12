@@ -14,6 +14,7 @@ namespace Games.Infraestructure
 		public DbSet<Publisher> Publishers { get; set; }
 		public DbSet<Platform> Plataforms { get; set; }
 		public DbSet<Roles> Roles { get; set; }
+		public DbSet<UserGame> UserGame { get; set; }
 
 		public HobbyContext(DbContextOptions<HobbyContext> options) : base(options)
 		{
@@ -36,6 +37,7 @@ namespace Games.Infraestructure
 			modelBuilder.ApplyConfiguration(new UserMapping());
 			modelBuilder.ApplyConfiguration(new RoleMappings());
 			modelBuilder.ApplyConfiguration(new GameMapping());
+			modelBuilder.ApplyConfiguration(new UserGameMapping());
 		}
 	}
 }

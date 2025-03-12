@@ -20,22 +20,30 @@ namespace Hobby.Infraestructure
 
         public void Init()
         {
-			_services.AddTransient<IGameService, GameService>();
-			_services.AddTransient<IGameRepository, GameRepository>();
-
-			_services.AddTransient<IUserService, UserService>();
-			_services.AddTransient<IUserRepository, UserRepository>();
-
-			_services.AddTransient<IDeveloperService, DeveloperService>();
-			_services.AddTransient<IDeveloperRepository, DeveloperRepository>();
-
-			_services.AddTransient<IPublisherService, PublisherService>();
-			_services.AddTransient<IPublisherRepository, PublisherRepository>();
-
-			_services.AddTransient<IPlatformService, PlatformService>();
-			_services.AddTransient<IPlatformRepository, PlatformRepository>();
-
-			_services.AddTransient<ITokenGenerator, TokenGenerator>();
+			SetServices();
+			SetRepositories();
+			
+			_services.AddScoped<ITokenGenerator, TokenGenerator>();
 		}
+
+        private void SetServices()
+        {
+	        _services.AddScoped<IGameService, GameService>();
+	        _services.AddScoped<IUserService, UserService>();
+	        _services.AddScoped<IDeveloperService, DeveloperService>();
+	        _services.AddScoped<IPublisherService, PublisherService>();
+	        _services.AddScoped<IPlatformService, PlatformService>();
+	        _services.AddScoped<IUserGameService, UserGameService>();
+        }
+
+        private void SetRepositories()
+        {
+	        _services.AddScoped<IGameRepository, GameRepository>();
+	        _services.AddScoped<IUserRepository, UserRepository>();
+			_services.AddScoped<IDeveloperRepository, DeveloperRepository>();
+			_services.AddScoped<IPublisherRepository, PublisherRepository>();
+			_services.AddScoped<IPlatformRepository, PlatformRepository>();
+			_services.AddScoped<IUserGameRepository, UserGameRepository>();
+        }
     }
 }

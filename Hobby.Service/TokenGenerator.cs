@@ -31,21 +31,30 @@ namespace Hobby.Service
 				string audience = _configuration["JWT:Audience"];
 
 				SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+				IList<Claim> claims = new List<Claim>();
+				claims.Add(new Claim(ClaimTypes.Name, usuarioLogin.Name));
+				claims.Add(new Claim(ClaimTypes.Role, usuarioLogin.Role.Name));
+				claims.Add(new Claim("UserId", usuarioLogin.Id.ToString()));
+				
+				
 				JwtSecurityToken tokenOptions = new JwtSecurityToken(
 					issuer,
 					audience,
-					claims: new[] { 
-						new Claim(ClaimTypes.Name, usuarioLogin.Name),
-						new Claim(ClaimTypes.Role, usuarioLogin.Role.Name)
-					},
+					claims: claims,
 					expires: DateTime.Now.AddHours(1),
 					signingCredentials: signingCredentials
 				);
 
 				string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-				return token;	
+				return token;
 			}
 			
+			return null;
+		}
+
+		private IList<Claim> GetClaims(User user)
+		{
 			return null;
 		}
 	}

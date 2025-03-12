@@ -15,7 +15,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
-
 	opt.SwaggerDoc("v1", new OpenApiInfo()
 	{
 		Version = "v1",
@@ -82,6 +81,9 @@ builder.Services.AddDbContext<HobbyContext>(opt => opt.UseNpgsql(connectionStrin
 InjectionDependeceMapping idMapping = new(builder.Services);
 idMapping.Init();
 
+builder.Services.AddHealthChecks();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -91,6 +93,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
+app.UseHealthChecks("/healthcheck");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

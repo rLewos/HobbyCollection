@@ -6,8 +6,8 @@ namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	[Authorize(Roles = "Manager")]
-	public class BaseController : ControllerBase
+	[Authorize]
+	public abstract class BaseController : ControllerBase
 	{
 		
 	}
