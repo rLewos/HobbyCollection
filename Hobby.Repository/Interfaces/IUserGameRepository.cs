@@ -5,5 +5,5 @@ namespace Hobby.Repository.Interfaces;
 
 public interface IUserGameRepository : IBaseRepository<UserGame>
 {
-    
+    UserGame? GetById(int gameId, int userId);
 }

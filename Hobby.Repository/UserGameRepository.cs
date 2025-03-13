@@ -21,11 +21,17 @@ public class UserGameRepository : IUserGameRepository
 
     public void Delete(UserGame? entity)
     {
-        throw new NotImplementedException();
+        _context.Remove(entity);
+        _context.SaveChanges();
     }
 
     public UserGame? Get(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public UserGame? GetById(int gameId, int userId)
+    {
+        return _context.UserGame.FirstOrDefault(x => x.GameId == gameId && x.UserId == userId);
     }
 }

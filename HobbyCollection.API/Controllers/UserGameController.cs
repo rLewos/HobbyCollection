@@ -31,10 +31,11 @@ public class UserGameController(IUserService userService, IGameService gameServi
         return Ok();
     }
 
-    [HttpDelete("Delete/{idGame}")]
-    public IActionResult Delete(int idGame)
+    [HttpDelete("Delete/{gameId}")]
+    public IActionResult Delete(int gameId)
     {
-        
+        var userId = Convert.ToInt32(User?.FindFirst("UserId")?.Value);
+        userGameService.Remove(userId, gameId);
         return Ok();
     }
 }

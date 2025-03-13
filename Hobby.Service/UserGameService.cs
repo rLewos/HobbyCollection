@@ -22,8 +22,23 @@ public class UserGameService(IUserGameRepository userGameRepository, IUserServic
         throw new NotImplementedException();
     }
 
+    public UserGame? GetById(int gameId, int userId)
+    {
+        return userGameRepository.GetById(gameId, userId);
+    }
+
+    public void Remove(int userId, int gameId)
+    {
+        var userGame = GetById(gameId, userId);
+        userGameRepository.Delete(userGame);
+    }
+
     public void Save(int userId, UserGame userGame)
     {
+        var userGameObj = userGameRepository.GetById(userGame.GameId.Value, userId);
+        if (userGameObj != null)
+            throw new Exception("UserGame already exists");
+        
         var user = userService.GetById(userId);
         if (user == null)
             throw new Exception("Usuario inexistente");
