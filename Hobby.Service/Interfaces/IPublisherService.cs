@@ -10,6 +10,6 @@ namespace Hobby.Service.Interfaces
 {
 	public interface IPublisherService : IBaseService<Publisher>
 	{
-
+		IList<Publisher>? ListAll();
 	}
 }

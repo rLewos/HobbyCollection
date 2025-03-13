@@ -5,7 +5,7 @@ using Hobby.Service.Interfaces;
 
 namespace Hobby.Service
 {
-	public class DeveloperService : IBaseService<Developer>, IDeveloperService
+	public class DeveloperService : IDeveloperService
 	{
 		private readonly IDeveloperRepository _developerRepository;
 
@@ -34,7 +34,13 @@ namespace Hobby.Service
 
 		public Developer? GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _developerRepository.Get(id);
+		}
+
+		public void Remove(int id)
+		{
+			Developer? developer = GetById(id);
+			_developerRepository.Delete(developer);
 		}
 
 		public IList<Developer> ListAll()
@@ -44,12 +50,7 @@ namespace Hobby.Service
 
 		public void Save(Developer obj)
 		{
-			_developerRepository.Add(obj);
-		}
-
-		public void Validate(Developer t)
-		{
-			throw new NotImplementedException();
+			_developerRepository.Save(obj);
 		}
 	}
 }

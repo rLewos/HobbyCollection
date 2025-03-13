@@ -2,15 +2,10 @@
 using Games.Service.Interfaces;
 using Hobby.Repository.Interfaces;
 using Hobby.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hobby.Service
 {
-	public class PublisherService : IBaseService<Publisher>, IPublisherService
+	public class PublisherService : IPublisherService
 	{
 		private readonly IPublisherRepository _publisherRepository;
 
@@ -19,24 +14,25 @@ namespace Hobby.Service
             this._publisherRepository = publisherRepository;
         }
 
-		public void Delete(int id)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Publisher? GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _publisherRepository.Get(id);
+		}
+
+		public void Remove(int id)
+		{
+			Publisher? publisher = GetById(id);
+			_publisherRepository.Delete(publisher);
+		}
+
+		public IList<Publisher>? ListAll()
+		{
+			return _publisherRepository.ListAll();
 		}
 
 		public void Save(Publisher obj)
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Validate(Publisher t)
-		{
-			throw new NotImplementedException();
+			_publisherRepository.Save(obj);	
 		}
 	}
 }

@@ -1,53 +1,72 @@
-﻿using Hobby.Model.DTO;
-using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using AutoMapper;
+using Games.Model;
+using Games.Service.Interfaces;
+using Hobby.Model.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace HobbyCollection.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+    [Authorize(Roles = "Manager")]
 	public class GameController : BaseController
 	{
-        public GameController()
+		private readonly IMapper _mapper;
+		private readonly IGameService _gameService;
+		
+        public GameController(IMapper mapper, IGameService gameService) 
+		{
+			_mapper = mapper;
+			_gameService = gameService;
+		}
+
+        [HttpGet("GetById/{id}")]
+        public IActionResult  GetById(int id)
         {
-            
+			Game game = _gameService.GetById(id);
+			GameDTO gameDTO = _mapper.Map<GameDTO>(game);
+
+			return Ok(gameDTO);
         }
 
-        [HttpGet]
-        public GameDTO Get(int id)
+        [HttpPost("Save")]
+        public IActionResult Save([FromBody] GameDTO gameDTO)
         {
-            GameDTO gameDTO = new GameDTO();
-            gameDTO.Id = 1;
-			gameDTO.Name = "NieR: Automata";
+			try
+			{
+				Game game = _mapper.Map<Game>(gameDTO);
+				_gameService.Save(game);
 
-			return gameDTO;
+				return Ok();
+			}
+			catch (Exception e)
+			{
+				return BadRequest(e.Message);
+			}
         }
 
-        [HttpPost]
-        public void Save(GameDTO game)
+		[HttpGet("List")]
+		public IActionResult List()
         {
-            Debug.WriteLine(game.Name);
-        }
+  			IList<Game> gameList = _gameService.ListAll();
+			IList<GameDTO> gameDTOList = _mapper.Map<IList<GameDTO>>(gameList);
 
-		[HttpGet]
-		public IList<GameDTO> List()
-        {
-            IList<GameDTO> gameDTOList = new List<GameDTO>();
+			return Ok(gameDTOList);
+        }
+		
+		[HttpGet("ListByUser")]
+		public IActionResult ListByUser()
+		{
+			string? userId = User?.FindFirstValue("UserId");
+			if (userId == null)
+				return BadRequest();
 			
-            GameDTO gameDTO = new GameDTO();
-			gameDTO.Id = 1;
-			gameDTO.Name = "NieR: Automata";
-
-			gameDTOList.Add(gameDTO);
-
-			GameDTO gameDTO2 = new GameDTO();
-			gameDTO.Id = 2;
-			gameDTO.Name = "Hatsune Miku: Project DIVA Future Tone DX";
-
-            gameDTOList.Add(gameDTO2);
-
-			return gameDTOList;
-        }
+			var gameList = _gameService.ListByUserId(userId);
+			var gameDtoList = _mapper.Map<IList<GameDTO>>(gameList);
+			
+			return Ok(gameDtoList);
+		}
     }
 }

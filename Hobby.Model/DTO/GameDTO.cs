@@ -23,6 +23,6 @@ namespace Hobby.Model.DTO
 		public IList<PublisherDTO>? PublisherList { get; set; }
 		
 		[JsonInclude]
-		public IList<PlataformDTO>? PlataformList { get; set; }
+		public IList<PlatformDTO>? PlataformList { get; set; }
 	}
 }

@@ -21,6 +21,7 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult List()
 		{
 			PublisherViewModel vm = new PublisherViewModel();
+			vm.PublisherList = _publisherService.ListAll();
 
 			return View(vm);
 		}
@@ -35,9 +36,18 @@ namespace HobbyCollection.Website.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Save()
+		public IActionResult Save(PublisherViewModel vm)
 		{
-			return RedirectToAction("List");
+			try
+			{
+				_publisherService.Save(vm.Publisher);
+			}
+			catch (Exception e)
+			{
+				return this.Json(false, "Publisher couldn't be saved.");
+			}
+
+			return this.Json(true, "Publisher has been saved sucessfully.");
 		}
 	}
 }

@@ -1,0 +1,41 @@
+﻿@model HobbyCollection.Website.ViewModels.PlatformViewModel
+
+@if (Model.PlataformList != null && Model.PlataformList.Count > 0)
+{
+	<table id="tablePlataform" class="table table-light">
+
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th> - </th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var item in Model.PlataformList)
+			{
+				<tr itemid="@item.Id">
+					<td>@item.Name</td>
+					<td>
+						<button type="button"><i>I</i> Edit</button>
+						<button type="button"><i>I</i> Remove</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+}
+else
+{
+	<p>There aren't any platforms.</p>
+}
+
+
+@section Scripts {
+	<script type="text/javascript">
+		$(() => {
+			$("#tablePlataform");
+		});
+	</script>
+}

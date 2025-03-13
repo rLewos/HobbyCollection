@@ -11,5 +11,6 @@ namespace Games.Service.Interfaces
     {
 		Game? GetByName(string gameName);
 		IList<Game> ListAll();
+		IList<Game> ListByUserId(string userId);
     }
 }

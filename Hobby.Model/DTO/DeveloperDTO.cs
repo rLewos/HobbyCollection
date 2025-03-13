@@ -8,5 +8,6 @@ namespace Hobby.Model.DTO
 {
 	public class DeveloperDTO
 	{
-	}
+        public string Name { get; set; }
+    }
 }

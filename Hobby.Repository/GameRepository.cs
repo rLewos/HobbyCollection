@@ -1,30 +1,17 @@
 ﻿using Games.Infraestructure;
 using Games.Model;
 using Games.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Games.Repository
 {
-	public class GameRepository : IBaseRepository<Game>, IGameRepository
+	public class GameRepository : IGameRepository
 	{
 		private HobbyContext _context;
 
 		public GameRepository(HobbyContext hobbyContext)
 		{
-			_context = hobbyContext;	
-		}
-
-		public void Add(Game entity)
-		{
-			try
-			{
-				_context.Games.Add(entity);
-				_context.SaveChanges();
-			}
-			catch (Exception e)
-			{
-				
-				throw;
-			}
+			_context = hobbyContext;
 		}
 
 		public void Delete(Game? entity)
@@ -53,15 +40,30 @@ namespace Games.Repository
 
 		public IList<Game> ListAll()
 		{
-			IList<Game> list = new List<Game>();
-			list = _context.Games.ToList();
-
-			return list;
+			return _context.Games.ToList();
 		}
 
-		public void Update(Game entity)
+		public IList<Game> ListByUserId(string userId)
 		{
-			throw new NotImplementedException();
+			IList<Game> games =_context.UserGame.Where(ug => string.Equals(ug.User.Id.ToString(), userId)).Select(x => x.Game).ToList();
+			return games;
+		}
+
+		public void Save(Game entity)
+		{
+			try
+			{
+				if (entity.Id > 0)
+					_context.Games.Update(entity);
+				else
+					_context.Games.Add(entity);
+
+				_context.SaveChanges();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 	}
 }

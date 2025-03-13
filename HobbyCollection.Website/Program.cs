@@ -3,9 +3,7 @@ using HobbyCollection.Website;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); // Add services to the container.
 
 string? connectionString = builder.Configuration.GetConnectionString("Default");
 if (connectionString == null)
@@ -13,6 +11,7 @@ if (connectionString == null)
 
 builder.Services.AddDbContext<HobbyContext>(opt => opt.UseNpgsql(connectionString));
 
+// Is this the best way to do this 'class mapping'?
 InjectionDependeceMapping idMapping = new (builder.Services) ;
 idMapping.Init();
 
@@ -28,9 +27,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(name: "default",   pattern: "{controller=Home}/{action=Index}/{id?}");

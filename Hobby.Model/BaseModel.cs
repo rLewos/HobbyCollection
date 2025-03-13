@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 
 namespace Games.Model
 {
-    public  abstract class BaseModel
+    public abstract class BaseModel
     {
         public int Id { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public bool IsActive { get; set; } = true;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
 
-        public abstract void Validate();
+        public virtual ValidationResult Validate()
+        {
+            return new ValidationResult();
+        }
     }
 }

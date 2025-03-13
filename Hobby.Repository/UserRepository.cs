@@ -2,6 +2,7 @@
 using Games.Model;
 using Games.Repository.Interfaces;
 using Hobby.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobby.Repository
 {
@@ -12,19 +13,6 @@ namespace Hobby.Repository
 		public UserRepository(HobbyContext hobbyContext)
 		{
 			_context = hobbyContext;
-		}
-
-		public void Add(User entity)
-		{
-			try
-			{
-				_context.Users.Add(entity);
-				_context.SaveChanges();
-			}
-			catch (Exception e)
-			{
-				throw;
-			}
 		}
 
 		public void Delete(User entity)
@@ -45,9 +33,9 @@ namespace Hobby.Repository
 			return _context.Users.SingleOrDefault(u => u.Id == id);
 		}
 
-		public User GetByName(string userName)
+		public User GetByName(string name)
 		{
-			return _context.Users.SingleOrDefault(u => u.Name == userName);
+			return _context.Users.SingleOrDefault(u => u.Name == name);
 		}
 
 		public IList<User> ListAll()
@@ -55,9 +43,40 @@ namespace Hobby.Repository
 			return _context.Users.ToList();
 		}
 
-		public void Update(User entity)
+		public User? Login(string nickname, string password)
 		{
-			throw new NotImplementedException();
+			User? userLogin = _context.Users.Include("Role").SingleOrDefault(u => u.Nickname == nickname);
+
+			bool isNicknameRight = userLogin != null && (string.Equals(userLogin.Nickname, nickname));
+			bool isPasswordRight = userLogin != null && (string.Equals(userLogin.Password, password));
+
+			if (isNicknameRight && isPasswordRight)
+				return userLogin;
+			
+			return null;
+		}
+
+		public User? GetByNickname(string nickname)
+		{
+			return _context.Users.SingleOrDefault(u => u.Nickname == nickname);
+		}
+
+		public void Save(User entity)
+		{
+			try
+			{
+				if (entity.Id > 0)
+					_context.Users.Update(entity);
+				else
+					_context.Users.Add(entity);
+				
+				_context.SaveChanges();
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
 		}
 	}
 }

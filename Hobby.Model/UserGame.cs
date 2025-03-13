@@ -8,13 +8,10 @@ namespace Games.Model
 {
 	public class UserGame : BaseModel
     {
+	    public int? UserId { get; set; }
         public User? User { get; set; }
+        public int? GameId { get; set; }
         public Game? Game { get; set; }
         public bool HasBeaten { get; set; }
-
-		public override void Validate()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

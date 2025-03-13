@@ -17,7 +17,7 @@ namespace Hobby.Infraestructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -90,7 +90,7 @@ namespace Hobby.Infraestructure.Migrations
                     b.ToTable("Tb_Game", (string)null);
                 });
 
-            modelBuilder.Entity("Games.Model.Plataform", b =>
+            modelBuilder.Entity("Games.Model.Platform", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,6 +157,38 @@ namespace Hobby.Infraestructure.Migrations
                     b.ToTable("Tb_Publisher", (string)null);
                 });
 
+            modelBuilder.Entity("Games.Model.Roles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_Roles");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("dt_Created");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_Active");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("nm_User");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("dt_Updated");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Roles");
+
+                    b.ToTable("Tb_Role", (string)null);
+                });
+
             modelBuilder.Entity("Games.Model.User", b =>
                 {
                     b.Property<int>("Id")
@@ -184,6 +216,15 @@ namespace Hobby.Infraestructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("nm_Nickname");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ds_Password");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_roles");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("dat_Updated");
@@ -191,7 +232,47 @@ namespace Hobby.Infraestructure.Migrations
                     b.HasKey("Id")
                         .HasName("PK_User");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Tb_User", (string)null);
+                });
+
+            modelBuilder.Entity("Games.Model.UserGame", b =>
+                {
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("cd_user_id");
+
+                    b.Property<int?>("GameId")
+                        .HasColumnType("integer")
+                        .HasColumnName("cd_game_id");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("dat_created");
+
+                    b.Property<bool>("HasBeaten")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("has_beaten");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("dat_updated");
+
+                    b.HasKey("UserId", "GameId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Tb_UserGame", (string)null);
                 });
 
             modelBuilder.Entity("Tb_GameDeveloper", b =>
@@ -239,40 +320,32 @@ namespace Hobby.Infraestructure.Migrations
                     b.ToTable("Tb_GamePublisher");
                 });
 
-            modelBuilder.Entity("Tb_UserGame", b =>
+            modelBuilder.Entity("Games.Model.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                    b.HasOne("Games.Model.Roles", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Navigation("Role");
+                });
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+            modelBuilder.Entity("Games.Model.UserGame", b =>
+                {
+                    b.HasOne("Games.Model.Game", "Game")
+                        .WithMany("UserGameList")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int?>("GameId")
-                        .HasColumnType("integer");
+                    b.HasOne("Games.Model.User", "User")
+                        .WithMany("UserGameList")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<bool>("HasBeaten")
-                        .HasColumnType("boolean")
-                        .HasColumnName("has_Beaten");
+                    b.Navigation("Game");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Tb_UserGame");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Tb_GameDeveloper", b =>
@@ -298,7 +371,7 @@ namespace Hobby.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Games.Model.Plataform", null)
+                    b.HasOne("Games.Model.Platform", null)
                         .WithMany()
                         .HasForeignKey("PlataformListId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -318,21 +391,6 @@ namespace Hobby.Infraestructure.Migrations
                         .HasForeignKey("PublisherListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Tb_UserGame", b =>
-                {
-                    b.HasOne("Games.Model.Game", "Game")
-                        .WithMany("UserGameList")
-                        .HasForeignKey("GameId");
-
-                    b.HasOne("Games.Model.User", "User")
-                        .WithMany("UserGameList")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Game");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Games.Model.Game", b =>

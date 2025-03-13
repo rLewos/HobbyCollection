@@ -1,0 +1,19 @@
+﻿using AutoMapper;
+using Games.Model;
+using Hobby.Model.DTO;
+
+namespace HobbyCollection.API
+{
+	public class MappingProfile : Profile
+	{
+        public MappingProfile()
+        {
+			CreateMap<Game, GameDTO>().ReverseMap();
+			CreateMap<User, UserDTO>().ReverseMap();
+			CreateMap<Platform, PlatformDTO>().ReverseMap();
+			CreateMap<Publisher, PublisherDTO>().ReverseMap();
+			CreateMap<Developer, DeveloperDTO>().ReverseMap();
+			CreateMap<UserGame, UserGameDTO>().ReverseMap();
+		}
+    }
+}
