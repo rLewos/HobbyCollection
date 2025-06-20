@@ -3,18 +3,18 @@ using HobbyCollection.Website.Models.DTO;
 
 namespace HobbyCollection.Website.Service;
 
-public class PlataformService : BaseService<PlatformDto>, IPlataformService
+public class PlatformService : BaseService<PlatformDto>, IPlatformService
 {
-    private string _baseEndPoint = "Plataform";
+    private string _baseEndPoint = "Platform/";
     
-    public PlataformService() : base()
+    public PlatformService() : base()
     {
         
     }
 
     public async Task<PlatformDto> GetById(int id)
     {
-        string url = BaseUrl + _baseEndPoint + "/" + id;
+        string url = BaseUrl + _baseEndPoint + "GetById" + "/" + id;
         
         using (var client = new HttpClient())
         {

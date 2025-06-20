@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hobby.Model.DTO
+﻿namespace HobbyCollection.Website.Models.DTO
 {
-	public class PlatformDTO
+	public class PlatformDto : BaseDto
 	{
 		public string? Name { get; set; }
 		public string? Abbreviation { get; set; }

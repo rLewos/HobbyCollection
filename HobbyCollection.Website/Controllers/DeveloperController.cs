@@ -66,7 +66,7 @@ namespace HobbyCollection.Website.Controllers
 		{
 			try
 			{
-				_developerService.Delete(id);
+				//_developerService.Delete(id);
 			}
 			catch (Exception e)
 			{

@@ -1,18 +1,24 @@
-@model TModel
+@model HobbyCollection.Website.ViewModels.LoginViewModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Login";
 }
 
-<!DOCTYPE html>
+<form method="post" asp-controller="Login" asp-action="Login">
+    <label asp-for="Login.userName">Username</label>
+    <input type="text" asp-for="Login.userName"/>
+    
+    <label asp-for="Login.password">Password</label>
+    <input type="password" asp-for="Login.password"/>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+    <button type="submit">Login</button>
+    <button type="reset">Cancel</button>
+</form>
+
+@section Scripts{
+    <script language="JavaScript">
+        $(() =>{
+            
+        })
+    </script>
+}

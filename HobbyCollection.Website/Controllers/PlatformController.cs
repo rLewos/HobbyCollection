@@ -1,15 +1,16 @@
-﻿using Hobby.Service.Interfaces;
+﻿using HobbyCollection.Website.Models.DTO;
 using HobbyCollection.Website.ViewModels;
+using HobbyCollection.Website.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.Website.Controllers
 {
 	public class PlatformController : BaseController
 	{
-		private readonly IPlatformService _iPlatformService;
+		private readonly IPlatformService _platformService;
         public PlatformController(IPlatformService iPlatformService)
         {
-            this._iPlatformService = iPlatformService;
+            _platformService = iPlatformService;
         }
 
         #region Views
@@ -22,7 +23,7 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult List()
 		{
 			PlatformViewModel vm = new PlatformViewModel();
-			vm.PlataformList = _iPlatformService.ListAll();
+			//vm.PlataformList = _platformService.ListAll();
 
 			return View(vm);
 		}
@@ -30,6 +31,14 @@ namespace HobbyCollection.Website.Controllers
 		public IActionResult Add()
 		{
 			return View();
+		}
+
+		public async Task<IActionResult> Detail(int id)
+		{
+			var vm = new PlatformViewModel();
+			vm.Plataform = await _platformService.GetById(id);
+			
+			return View(vm);
 		}
 
 		#endregion
@@ -40,7 +49,7 @@ namespace HobbyCollection.Website.Controllers
 		{
 			try
 			{
-				_iPlatformService.Save(vm.Plataform);
+				//_iPlatformService.Save(vm.Plataform);
 			}
 			catch (Exception e)
 			{

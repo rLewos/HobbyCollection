@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hobby.Model.DTO
+﻿namespace HobbyCollection.Website.Models.DTO
 {
-	public class DeveloperDTO
+	public class DeveloperDto :  BaseDto
 	{
         public string Name { get; set; }
     }

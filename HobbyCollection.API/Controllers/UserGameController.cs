@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyCollection.API.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 [Authorize(Roles = "Manager,REGULAR")]
-public class UserGameController(IUserService userService, IGameService gameService, IUserGameService userGameService, IMapper mapper)
+public class UserGameController(IUserGameService userGameService, IMapper mapper)
     : BaseController
 {
     [HttpPost("Save")]

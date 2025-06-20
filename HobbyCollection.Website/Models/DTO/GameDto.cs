@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using HobbyCollection.Website.Models.DTO;
 
 namespace Hobby.Model.DTO
 {
-	public class GameDTO : BaseDTO
+	public class GameDto : HobbyCollection.Website.Models.DTO.BaseDto
 	{
 		[JsonInclude]
 		public string? Name { get; set; }
@@ -17,12 +18,12 @@ namespace Hobby.Model.DTO
         public DateTime? ReleaseDate { get; set; }
 
 		[JsonInclude]
-		public IList<DeveloperDTO>? DeveloperList { get; set; }
+		public IList<HobbyCollection.Website.Models.DTO.DeveloperDto>? DeveloperList { get; set; }
 
 		[JsonInclude]
-		public IList<PublisherDTO>? PublisherList { get; set; }
+		public IList<PublisherDto>? PublisherList { get; set; }
 		
 		[JsonInclude]
-		public IList<PlatformDTO>? PlataformList { get; set; }
+		public IList<PlatformDto>? PlataformList { get; set; }
 	}
 }

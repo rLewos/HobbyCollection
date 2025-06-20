@@ -24,7 +24,6 @@ namespace Games.Infraestructure
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			this.SetMappings(modelBuilder);
-
 			base.OnModelCreating(modelBuilder);
 		}
 

@@ -1,11 +1,11 @@
-﻿using Games.Model;
+﻿using HobbyCollection.Website.Models.DTO;
 
 namespace HobbyCollection.Website.ViewModels
 {
 	public class PlatformViewModel
 	{
-        public Platform?  Plataform { get; set; }
-        public IList<Platform>? PlataformList{ get; set; }
+        public PlatformDto?  Plataform { get; set; }
+        public IList<PlatformDto>? PlataformList{ get; set; }
 
         public PlatformViewModel()
         {

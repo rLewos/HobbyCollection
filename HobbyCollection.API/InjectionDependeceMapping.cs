@@ -22,12 +22,12 @@ namespace Hobby.Infraestructure
         {
 			SetServices();
 			SetRepositories();
-			
-			_services.AddScoped<ITokenGenerator, TokenGenerator>();
 		}
 
         private void SetServices()
         {
+	        _services.AddScoped<ITokenGenerator, TokenGenerator>();
+	        
 	        _services.AddScoped<IGameService, GameService>();
 	        _services.AddScoped<IUserService, UserService>();
 	        _services.AddScoped<IDeveloperService, DeveloperService>();

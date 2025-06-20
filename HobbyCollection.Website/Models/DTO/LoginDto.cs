@@ -1,6 +1,6 @@
-﻿namespace Hobby.Model.DTO
+﻿namespace HobbyCollection.Website.Models.DTO
 {
-	public record LoginDTO(string userName, string password)
+	public record LoginDto(string userName, string password)
 	{
 	}
 }

@@ -74,7 +74,7 @@ namespace Games.Controllers
 		[HttpPost]
 		public IActionResult Delete(int? idGame)
 		{
-			_gameService.Delete(idGame.Value);
+			//_gameService.Delete(idGame.Value);
 
 			return View();
 		}

@@ -23,8 +23,10 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult List()
 		{
-			UserViewModel vm = new UserViewModel();
-			vm.UserList = _userService.ListAll();
+			var vm = new UserViewModel
+			{
+				UserList = _userService.ListAll()
+			};
 
 			return View(vm);
 		}
@@ -36,8 +38,10 @@ namespace HobbyCollection.Website.Controllers
 
 		public IActionResult Edit(int id) {
 
-			UserViewModel vm = new UserViewModel();
-			vm.User = _userService.GetById(id);
+			var vm = new UserViewModel
+			{
+				User = _userService.GetById(id)
+			};
 
 			return View("Add", vm);
 		}

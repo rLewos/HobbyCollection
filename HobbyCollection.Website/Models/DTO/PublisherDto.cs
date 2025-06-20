@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hobby.Model.DTO
 {
-	public class PublisherDTO
+	public class PublisherDto
 	{
 		public string? Name { get; set; }
 	}
